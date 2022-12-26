@@ -1,9 +1,11 @@
 package payment_system;
 
+
+
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "refunds", "users"})
 public class PaymentSystemApplication {
 
 	public static void main(String[] args) {
