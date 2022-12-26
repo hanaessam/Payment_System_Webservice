@@ -1,23 +1,26 @@
-package Users;
+package security;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import Users.User;
+import refunds.RefundRequest;
+
 @Service
-public class UserBsl {
+public class Authentication {
+
 	ArrayList<User> users;
-	
-	public UserBsl() {
-		// TODO Auto-generated constructor stub
+	public Authentication() {
 		users = new ArrayList<>();
 	}
 	
-	public String add(User user) {
+	public String addUser(User user) {
 		for(User userDB : users) {
 			if(userDB.getID() == user.getID()) {
 				return"ID already exist";
 			}
+			
 		}
 		users.add(user);
 		return"User is added successfully";
@@ -31,4 +34,16 @@ public class UserBsl {
 		}
 		return null;
 	}
+	
+	public String checkUser(int id){
+		for(User userDB : users) {
+			if(userDB.getID() == id) {
+				return "User exists";
+			}
+		}
+		return "User is not found!";
+	}
+	
+	
+	
 }

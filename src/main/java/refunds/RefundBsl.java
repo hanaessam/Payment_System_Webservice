@@ -6,14 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RefundBsl {
-	ArrayList<RefundRequest> refundRequests;
-	
+	public ArrayList<RefundRequest> refundRequests;
 	public RefundBsl() {
-		// TODO Auto-generated constructor stub
 		refundRequests = new ArrayList<>();
 	}
-	
-	public String add(RefundRequest request) {
+	public String addRefund(RefundRequest request) {
 		for(RefundRequest requestDB : refundRequests) {
 			if(requestDB.getID() == request.getID()) {
 				return"Refund already requested";
@@ -26,9 +23,29 @@ public class RefundBsl {
 	public RefundRequest getRefund(int id) {
 		for(RefundRequest requestDB : refundRequests) {
 			if(requestDB.getID() == id) {
-				return  requestDB;
+				return requestDB;
 			}
 		}
 		return null;
 	}
+	
+	public String checkRefund(int id){
+		for(RefundRequest requestDB : refundRequests) {
+			if(requestDB.getID() == id) {
+				return "Refund request is found";
+			}
+		}
+		return "Refund request is not found!";
+	}
+	
+	//if refund accepted add the refunded amount to wallet
+		public String setWalletBalance(int walletBalance) {
+			for (RefundRequest refundreq : refundRequests) {
+				if(refundreq.getStatus() == "accepted") {
+				walletBalance+=refundreq.getAmount();
+				return "Wallet balance is updated with the refunded amount: "+ walletBalance +" !";
+				}
+			}
+			return "Wallet balance was not updated";
+		}
 }

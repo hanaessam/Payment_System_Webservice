@@ -1,5 +1,5 @@
 package refunds;
-
+import security.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,18 +12,21 @@ public class RefundController implements Subject {
 	RefundBsl refundBsl;
 	
 	public RefundController(RefundBsl refundBsl) {
-		// TODO Auto-generated constructor stub
 		this.refundBsl = refundBsl;
 	}
 	
 	@PostMapping(value="/refunds")
 	public String requestRefund(@RequestBody RefundRequest refund) {
-		return refundBsl.add(refund);
+		return refundBsl.addRefund(refund);
 	}
 	
 	@GetMapping(value="/refunds/{id}")
-	public RefundRequest login(@PathVariable("id") int id) {
+	public RefundRequest loginRefund(@PathVariable("id") int id) {
 		return refundBsl.getRefund(id);
+	}
+	@GetMapping(value="/refunds/check/{id}")
+	public String checkRefund(@PathVariable("id") int id) {
+		return refundBsl.checkRefund(id);
 	}
 	
 	@PutMapping(value="/refunds/{id}/{status}")

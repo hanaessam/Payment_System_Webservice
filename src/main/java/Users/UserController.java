@@ -6,22 +6,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import security.Authentication;
+
 @RestController
 public class UserController {
-	UserBsl userBsl;
+	Authentication userBsl;
 	
-	public UserController(UserBsl userBsl) {
-		// TODO Auto-generated constructor stub
+	public UserController(Authentication userBsl) {
 		this.userBsl = userBsl;
 	}
 	
 	@PostMapping(value="/users")
-	public String register(@RequestBody User user) {
-		return userBsl.add(user);
+	public String registerUser(@RequestBody User user) {
+		return userBsl.addUser(user);
 	}
 	
 	@GetMapping(value="/users/{id}")
-	public User login(@PathVariable("id") int id) {
+	public User loginUser(@PathVariable("id") int id) {
 		return userBsl.getUser(id);
+	}
+	@GetMapping(value="/users/check/{id}")
+	public String checkUser(@PathVariable("id") int id) {
+		return userBsl.checkUser(id);
 	}
 }
