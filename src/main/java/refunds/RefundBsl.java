@@ -63,7 +63,7 @@ public class RefundBsl {
 	
 	public String setWalletBalance(RefundRequest request, Boolean status) {
 		if(status) {
-			int newWalletBalance = security.Authentication.getUser(request.getUserID()).getWalletBalance() + request.getAmount();
+			int newWalletBalance = Authentication.getUser(request.getUserID()).getWalletBalance() + request.getAmount();
 			security.Authentication.getUser(request.getUserID()).setWalletBalance(newWalletBalance);
 			return "Wallet balance is updated with the refunded amount: "+ newWalletBalance +" !";
 		}

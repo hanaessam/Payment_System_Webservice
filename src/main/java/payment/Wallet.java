@@ -5,9 +5,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Wallet implements Payment{
 	private int transactionId;
-	private int userId;
-	private int amount;
+	private static int userId;
+	private  int amount;
 	private String serviceName;
+	private int id;
 	public String getserviceName() {
 		return serviceName;
 	}
@@ -21,16 +22,19 @@ public class Wallet implements Payment{
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
-	public int getUserId() {
+	public static int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getAmount() {
+	public  int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	public void setid(int id) {
+		this.id = id;
 	}
 }

@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import Users.User;
 
 @RestController
 public class PaymentController {
 	CreditCardBsl creditCardBsl;
 	WalletBsl walletBsl;
 	CashBsl cashBsl;
+	User user;
 	static int transactionID=0;
 	
 	public PaymentController(CreditCardBsl creditCardBsl, WalletBsl walletBsl, CashBsl cashBsl) {
@@ -38,6 +40,11 @@ public class PaymentController {
 	@GetMapping(value="/payment/creditcard/{cardId}")
 	public CreditCard getCredit(@PathVariable("cardId") int cardId) {
 		return creditCardBsl.getCreditCard(cardId);
+	}
+	
+	@GetMapping(value="/payment/wallet/{UserID}")
+	public Wallet getWallet(@PathVariable ("UserID") int userId) {
+		return walletBsl.getWallet(userId);
 	}
 
 	@PutMapping(value="/payment/creditcard/addToWallet/{id}/{funds}")

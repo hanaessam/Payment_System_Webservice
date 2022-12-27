@@ -8,7 +8,7 @@ public class User{
 	private String username;
 	private String email;
 	private String password;
-	private int walletBalance;
+	public int walletBalance;
 
 	public User() {
 		this.id=0;
@@ -62,4 +62,5 @@ public class User{
 	public String getEmail() {
 		return email;
 	}
+	
 }
