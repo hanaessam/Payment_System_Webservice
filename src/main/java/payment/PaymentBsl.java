@@ -9,7 +9,7 @@ import refunds.RefundBsl;
 import refunds.RefundRequest;
 
 @Service
-public class PaymentBsl implements Payment {
+public class PaymentBsl  {
 	ArrayList<CreditCard> creditCardTransactions; 
 	ArrayList<Wallet> walletTransactions;
 	RefundBsl refundBsl;
@@ -35,10 +35,7 @@ public class PaymentBsl implements Payment {
 		balance = balance - amount;
 		return "Success!";
 	}
-	public int addToWallet(int balance, int funds) {
-		balance = balance - funds;
-		return balance;
-	}
+	
 	public String checkWalletFunds(int walletBalance, int funds) {
 		if(walletBalance == 0 ||walletBalance<funds) {
 			return "Not enough credit";

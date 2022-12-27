@@ -4,13 +4,20 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import security.Authentication;
+
 @Service
 public class RefundBsl {
 	public ArrayList<RefundRequest> refundRequests;
+	
 	public RefundBsl() {
+		
 		refundRequests = new ArrayList<>();
 	}
 	public String addRefund(RefundRequest request) {
+		if(Authentication.getUser(request.getUserID())== null) {
+			return "User is not found";
+		}
 		for(RefundRequest requestDB : refundRequests) {
 			if(requestDB.getID() == request.getID()) {
 				return"Refund already requested";

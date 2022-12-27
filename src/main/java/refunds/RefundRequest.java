@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RefundRequest {
-	private User user;
 	private int refundID;
 	private int amount;
 	private int userID;

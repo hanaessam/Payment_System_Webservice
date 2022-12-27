@@ -8,12 +8,14 @@ public class User{
 	private String username;
 	private String email;
 	private String password;
+	private int walletBalance;
 
 	public User() {
 		this.id=0;
 		this.username = "";
 		this.password = "";
 		this.email = "";
+		this.walletBalance = 0;
 	}
 
 	public User(int id,String username, String password, String email) {

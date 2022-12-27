@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import Users.User;
+import lombok.Getter;
 import refunds.RefundRequest;
 
 @Service
 public class Authentication {
 
-	ArrayList<User> users;
+	static ArrayList<User> users;
 	public Authentication() {
 		users = new ArrayList<>();
 	}
@@ -26,7 +27,7 @@ public class Authentication {
 		return"User is added successfully";
 	}
 	
-	public User getUser(int id) {
+	public static User getUser(int id) {
 		for(User userDB : users) {
 			if(userDB.getID() == id) {
 				return userDB;
