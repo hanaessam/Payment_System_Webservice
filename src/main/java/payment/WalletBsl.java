@@ -13,17 +13,17 @@ public class WalletBsl{
 		wallets = new ArrayList<>();
 	}
 	
-	public String calculatePayment(Wallet wallet, int transactionID) {
-		if(security.Authentication.getUser(wallet.getUserId())==null)
+	public String calculatePayment(Payment wallet, int transactionID) {
+		if(security.Authentication.getUser(((Wallet)wallet).getUserId())==null)
 			return "User not found.";	
-		int walletBalance = security.Authentication.getUser(wallet.getUserId()).getWalletBalance();
-		if(walletBalance == 0 || walletBalance<wallet.getAmount()) {
+		int walletBalance = security.Authentication.getUser(((Wallet)wallet).getUserId()).getWalletBalance();
+		if(walletBalance == 0 || walletBalance<((Wallet)wallet).getAmount()) {
 			return "Not enough points in wallet";
 		}
-		wallet.setTransactionId(transactionID);
-		wallets.add(wallet);
-		walletBalance-=wallet.getAmount();
-		security.Authentication.getUser(wallet.getUserId()).setWalletBalance(walletBalance);
+		((Wallet)wallet).setTransactionId(transactionID);
+		wallets.add(((Wallet)wallet));
+		walletBalance-=((Wallet)wallet).getAmount();
+		security.Authentication.getUser(((Wallet)wallet).getUserId()).setWalletBalance(walletBalance);
 		return "Success!\nNew wallet balance: "+ walletBalance;
 	}
 	

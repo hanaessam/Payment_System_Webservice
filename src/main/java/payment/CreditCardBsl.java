@@ -26,16 +26,16 @@ public class CreditCardBsl {
 		return funds+" added to wallet successfully";
 	}
 
-	public String calculatePayment(CreditCard creditCard, int transactionID) {
-		if(security.Authentication.getUser(creditCard.getUserId())==null)
+	public String calculatePayment(Payment creditCard, int transactionID) {
+		if(security.Authentication.getUser(((CreditCard)creditCard).getUserId())==null)
 			return "User not found.";
-		if(creditCard.getBalance() == 0 ||creditCard.getBalance()<creditCard.getAmount()) {
+		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()<((CreditCard)creditCard).getAmount()) {
 			return "Not enough credit";
 		}
-		creditCard.setTransactionID(transactionID);
-		getCreditCards().add(creditCard);
-		int creditBalance = creditCard.getBalance()-creditCard.getAmount();
-		creditCard.setBalance(creditBalance);
+		((CreditCard)creditCard).setTransactionID(transactionID);
+		getCreditCards().add(((CreditCard)creditCard));
+		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmount();
+		((CreditCard)creditCard).setBalance(creditBalance);
 		return "Success!\nNew credit balance: "+ creditBalance;
 	}
 	

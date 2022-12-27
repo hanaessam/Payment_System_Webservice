@@ -12,12 +12,12 @@ public class CashBsl {
 		cash = new ArrayList<>();
 	}
 	
-	public String calculatePayment(Cash cash, int transactionID) {
-		if(security.Authentication.getUser(cash.getUserId())==null)
+	public String calculatePayment(Payment cash, int transactionID) {
+		if(security.Authentication.getUser( ((Cash)cash).getUserId())==null)
 			return "User not found.";
-		cash.setTransactionId(transactionID);
-		this.cash.add(cash);
-		return "Please pay "+ cash.getAmount() + " cash.";
+		((Cash)cash).setTransactionId(transactionID);
+		this.cash.add(((Cash)cash));
+		return "Please pay "+ ((Cash)cash).getAmount() + " cash.";
 	}
 	
 	public Cash getCash(int id) {

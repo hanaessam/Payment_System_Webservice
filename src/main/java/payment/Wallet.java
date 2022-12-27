@@ -3,10 +3,18 @@ package payment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Wallet {
+public class Wallet implements Payment{
 	private int transactionId;
 	private int userId;
 	private int amount;
+	private String serviceName;
+	public String getserviceName() {
+		return serviceName;
+	}
+	
+	public void setserviceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
 	public int getTransactionId() {
 		return transactionId;
 	}
