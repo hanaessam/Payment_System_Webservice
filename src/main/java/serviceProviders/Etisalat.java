@@ -1,4 +1,4 @@
-package Service_Providers;
+package serviceProviders;
 
 public class Etisalat {
 

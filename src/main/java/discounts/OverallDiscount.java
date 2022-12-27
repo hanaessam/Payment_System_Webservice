@@ -8,6 +8,12 @@ public class OverallDiscount extends DiscountDecorator{
 		super(discount);
 		this.discount = discount;
 	}
+
+	@Override
+	public String addDiscount(int price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
