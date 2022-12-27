@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreditCardBsl implements Payment {
-	ArrayList<CreditCard> creditCards;
+public class CreditCardBsl {
+	private static ArrayList<CreditCard> creditCards;
 	public CreditCardBsl() {
-		creditCards = new ArrayList<>();
+		setCreditCards(new ArrayList<>());
 	}
 
 	public String addToWallet(int id, int funds) {
 		if(getCreditCard(id)==null)
 			return "Credit card not found.";
-		for (CreditCard creditCard : creditCards) {
+		for (CreditCard creditCard : getCreditCards()) {
 			if(creditCard.getUserId() == id) {
 				if(creditCard.getBalance() == 0 || creditCard.getBalance()<funds) {
 					return "Not enough credit";
@@ -26,38 +26,56 @@ public class CreditCardBsl implements Payment {
 		return funds+" added to wallet successfully";
 	}
 
-	public String calculatePayment(int id, int amount) {
-		for (CreditCard creditCard : creditCards) {
-			if(creditCard.getUserId() == id) {
-				if(creditCard.getBalance() == 0 || creditCard.getBalance()<amount) {
-					return "Not enough credit";
-				}
-				creditCard.setBalance(creditCard.getBalance() - amount);
-			}
+	public String calculatePayment(CreditCard creditCard, int transactionID) {
+		if(security.Authentication.getUser(creditCard.getUserId())==null)
+			return "User not found.";
+		if(creditCard.getBalance() == 0 ||creditCard.getBalance()<creditCard.getAmount()) {
+			return "Not enough credit";
 		}
-		return "Success!";
+		creditCard.setTransactionID(transactionID);
+		getCreditCards().add(creditCard);
+		int creditBalance = creditCard.getBalance()-creditCard.getAmount();
+		creditCard.setBalance(creditBalance);
+		return "Success!\nNew credit balance: "+ creditBalance;
 	}
 	
-	public String addCreditCard(CreditCard creditCard) {
-		if(security.Authentication.getUser(creditCard.getUserId()) == null) {
-			return "User is not found";
-		}
-		for(CreditCard creditCardDB : creditCards) {
-			if(creditCardDB.getId() == creditCard.getId()) {
-				return "CreditCard already exists.";
-			}
-		}
-		creditCards.add(creditCard);
-		return"CreditCard info added successfully";
-	}
+//	public String addCreditCard(CreditCard creditCard) {
+//		if(security.Authentication.getUser(creditCard.getUserId()) == null) {
+//			return "User is not found";
+//		}
+//		for(CreditCard creditCardDB : creditCards) {
+//			if(creditCardDB.getCardID() == creditCard.getCardID()) {
+//				return "CreditCard already exists.";
+//			}
+//		}
+//		creditCards.add(creditCard);
+//		return"CreditCard info added successfully";
+//	}
 	
-	public CreditCard getCreditCard(int id) {
-		for(CreditCard creditCardDB : creditCards) {
-			if(creditCardDB.getId() == id) {
+	public CreditCard getCreditCard(int cardId) {
+		for(CreditCard creditCardDB : getCreditCards()) {
+			if(creditCardDB.getCardID() == cardId) {
 				return creditCardDB;
 			}
 		}
 		return null;
 	}
 	
+	public static CreditCard getCreditCardByTransaction(int transactionId) {
+		for(CreditCard creditCardDB : getCreditCards()) {
+			if(creditCardDB.getTransactionID() == transactionId) {
+				return creditCardDB;
+			}
+		}
+		return null;
+	}
+	
+
+	public static ArrayList<CreditCard> getCreditCards() {
+		return creditCards;
+	}
+
+	public static void setCreditCards(ArrayList<CreditCard> creditCards) {
+		CreditCardBsl.creditCards = creditCards;
+	}
 }

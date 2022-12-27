@@ -1,10 +1,14 @@
 package refunds;
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import payment.Wallet;
 
 @RestController
 public class RefundController implements Subject {
@@ -27,6 +31,11 @@ public class RefundController implements Subject {
 	@GetMapping(value="/refunds/check/{id}")
 	public String checkRefund(@PathVariable("id") int id) {
 		return refundBsl.checkRefund(id);
+	}
+	
+	@GetMapping(value="/refunds/listTransactions")
+	public ArrayList<RefundRequest> listRefundTransactions() {
+		return refundBsl.refundRequests;
 	}
 	
 	@PutMapping(value="/refunds/{id}/{status}")

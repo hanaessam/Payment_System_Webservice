@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import payment.CreditCard;
+import payment.PaymentBsl;
 import security.Authentication;
 
 @Service
@@ -19,17 +21,31 @@ public class RefundBsl {
 			return "User is not found";
 		}
 		for(RefundRequest requestDB : refundRequests) {
-			if(requestDB.getID() == request.getID()) {
-				return"Refund already requested";
+			if(requestDB.getTransactionID() == request.getTransactionID()) {
+				return"Refund is already requested";
 			}
 		}
-		refundRequests.add(request);
-		return"Refund is requested successfully";
+		if(payment.CreditCardBsl.getCreditCardByTransaction(request.getTransactionID())!=null) {
+			request.setAmount(payment.CreditCardBsl.getCreditCardByTransaction(request.getTransactionID()).getAmount());
+			refundRequests.add(request);
+			return"Refund is requested successfully";
+		}
+		if(payment.CashBsl.getCashByTransaction(request.getTransactionID())!=null ) {
+			request.setAmount(payment.CashBsl.getCashByTransaction(request.getTransactionID()).getAmount());
+			refundRequests.add(request);
+			return"Refund is requested successfully";
+		}
+		if(payment.WalletBsl.getWalletByTransaction(request.getTransactionID())!=null ) {
+			request.setAmount(payment.WalletBsl.getWalletByTransaction(request.getTransactionID()).getAmount());
+			refundRequests.add(request);
+			return"Refund is requested successfully";
+		}
+		return"Transaction not found.";
 	}
 	
 	public RefundRequest getRefund(int id) {
 		for(RefundRequest requestDB : refundRequests) {
-			if(requestDB.getID() == id) {
+			if(requestDB.getTransactionID() == id) {
 				return requestDB;
 			}
 		}
@@ -38,7 +54,7 @@ public class RefundBsl {
 	
 	public String checkRefund(int id){
 		for(RefundRequest requestDB : refundRequests) {
-			if(requestDB.getID() == id) {
+			if(requestDB.getUserID() == id) {
 				return "Refund request is found";
 			}
 		}
