@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import refunds.RefundBsl;
-import refunds.RefundRequest;
-
 @RestController
 public class CreditCardController {
-
 	CreditCardBsl creditCardBsl;
 	
 	public CreditCardController(CreditCardBsl creditCardBsl) {
@@ -32,5 +28,8 @@ public class CreditCardController {
 	public String checkCredit(@PathVariable("id") int id, @PathVariable("amount") int amount) {
 		return creditCardBsl.calculatePayment(id, amount);
 	}
-	
+	@PutMapping(value="/payment/creditcard/addToWallet/{id}/{funds}")
+	public String addToWallet(@PathVariable("id") int id, @PathVariable("funds") int funds) {
+		return creditCardBsl.addToWallet(id, funds);
+	}
 }

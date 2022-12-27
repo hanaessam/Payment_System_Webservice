@@ -11,9 +11,9 @@ public class RefundBsl {
 	public ArrayList<RefundRequest> refundRequests;
 	
 	public RefundBsl() {
-		
 		refundRequests = new ArrayList<>();
 	}
+	
 	public String addRefund(RefundRequest request) {
 		if(Authentication.getUser(request.getUserID())== null) {
 			return "User is not found";
@@ -45,14 +45,12 @@ public class RefundBsl {
 		return "Refund request is not found!";
 	}
 	
-	//if refund accepted add the refunded amount to wallet
-		public String setWalletBalance(int walletBalance) {
-			for (RefundRequest refundreq : refundRequests) {
-				if(refundreq.getStatus() == "accepted") {
-				walletBalance+=refundreq.getAmount();
-				return "Wallet balance is updated with the refunded amount: "+ walletBalance +" !";
-				}
-			}
-			return "Wallet balance was not updated";
+	public String setWalletBalance(RefundRequest request, Boolean status) {
+		if(status) {
+			int newWalletBalance = security.Authentication.getUser(request.getUserID()).getWalletBalance() + request.getAmount();
+			security.Authentication.getUser(request.getUserID()).setWalletBalance(newWalletBalance);
+			return "Wallet balance is updated with the refunded amount: "+ newWalletBalance +" !";
 		}
+		return "Wallet balance was not updated";
+	}
 }

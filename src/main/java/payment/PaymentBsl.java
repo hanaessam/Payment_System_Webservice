@@ -1,22 +1,16 @@
 package payment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.springframework.stereotype.Service;
-
 import refunds.RefundBsl;
-import refunds.RefundRequest;
 
 @Service
 public class PaymentBsl  {
 	ArrayList<CreditCard> creditCardTransactions; 
-	ArrayList<Wallet> walletTransactions;
 	RefundBsl refundBsl;
 	
 	public PaymentBsl() {
 		creditCardTransactions = new ArrayList<>();
-		walletTransactions = new ArrayList<>();
 	}
 
 	public int calculateCreditCardPayment(int balance, int amount) {

@@ -1,5 +1,4 @@
 package refunds;
-import security.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,46 +23,25 @@ public class RefundController implements Subject {
 	public RefundRequest loginRefund(@PathVariable("id") int id) {
 		return refundBsl.getRefund(id);
 	}
+	
 	@GetMapping(value="/refunds/check/{id}")
 	public String checkRefund(@PathVariable("id") int id) {
 		return refundBsl.checkRefund(id);
 	}
 	
 	@PutMapping(value="/refunds/{id}/{status}")
-	public RefundRequest adminResponse(@PathVariable("id") int id, @PathVariable ("status") String status) {
+	public String adminResponse(@PathVariable("id") int id, @PathVariable ("status") Boolean status) {
+		if(refundBsl.getRefund(id)==null)
+			return "Refund request not found.";
 		RefundRequest request = refundBsl.getRefund(id);
-		request.setStatus(status);
-		return request;
+		if(status)
+			request.setStatus("accepted");
+		else {
+			request.setStatus("rejected");
+		}
+		return "refund is " + request.getStatus() + "\n" + refundBsl.setWalletBalance(request, status);
 	}
 	
-//	public static final Map<List<String>,Integer> requests = new HashMap<>();
-//	public static String accepted;
-//	public static Form form;
-//	private static Scanner myObj = new Scanner(System.in);
-//	public static Observer userObserver;
-//	public static String observerUsername;
-//	MainForm userForm;
-//	
-//	public static HashMap<List<String>, Integer> getAdminResponse(List<User> users) {
-//		for (List<String> i : requests.keySet()) {
-//			if(i.size() != 2) {
-//				System.out.println("1-enter 'a' for Accepted \n2-enter 'r' for  Rejecterd");
-//				String accepted = myObj.next();
-//				if (!(i.contains("a") && i.contains("r"))) {
-//					i.add(accepted);
-//				}
-//				System.out.println(requests);
-//				for(int j=0;j<users.size();j++) {
-//					if(users.get(j).username == i.get(0) && accepted == "a" && accepted == "r") {
-//						((Wallet)users.get(j).wallet).setWalletBalance(requests.get(i));
-//						break;
-//					}
-//				}
-//			}
-//		}
-//		return (HashMap<List<String>, Integer>) requests;
-//	}
-//	
 //	public void subscribe(Observer userObserver) {
 //		RefundController.userObserver = (User) userObserver;
 //		System.out.println(User.username);

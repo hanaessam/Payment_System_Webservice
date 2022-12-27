@@ -1,12 +1,7 @@
 package payment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.springframework.stereotype.Service;
-
-import refunds.RefundRequest;
-import security.Authentication;
 
 @Service
 public class CreditCardBsl implements Payment {
@@ -14,15 +9,21 @@ public class CreditCardBsl implements Payment {
 	public CreditCardBsl() {
 		creditCards = new ArrayList<>();
 	}
-	
-//	public int calculatePayment(int balance, int amount) {
-//		balance = balance - amount;
-//		return balance;
-//	}
-//	
-	public int addToWallet(int balance, int funds) {
-		balance = balance - funds;
-		return balance;
+
+	public String addToWallet(int id, int funds) {
+		if(getCreditCard(id)==null)
+			return "Credit card not found.";
+		for (CreditCard creditCard : creditCards) {
+			if(creditCard.getUserId() == id) {
+				if(creditCard.getBalance() == 0 || creditCard.getBalance()<funds) {
+					return "Not enough credit";
+				}
+				int walletBalance = security.Authentication.getUser(getCreditCard(id).getUserId()).getWalletBalance();
+				security.Authentication.getUser(getCreditCard(id).getUserId()).setWalletBalance(walletBalance+funds);
+				break;
+			}
+		}
+		return funds+" added to wallet successfully";
 	}
 
 	public String calculatePayment(int id, int amount) {
@@ -38,7 +39,7 @@ public class CreditCardBsl implements Payment {
 	}
 	
 	public String addCreditCard(CreditCard creditCard) {
-		if(Authentication.getUser(creditCard.getUserId())== null) {
+		if(security.Authentication.getUser(creditCard.getUserId()) == null) {
 			return "User is not found";
 		}
 		for(CreditCard creditCardDB : creditCards) {

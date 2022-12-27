@@ -2,7 +2,6 @@ package payment;
 
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class CreditCard {
 	private int id;
@@ -46,7 +45,4 @@ public class CreditCard {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 }
-
-

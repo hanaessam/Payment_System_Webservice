@@ -1,5 +1,4 @@
 package refunds;
-import Users.User;import javax.sql.rowset.JoinRowSet;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +7,6 @@ public class RefundRequest {
 	private int refundID;
 	private int amount;
 	private int userID;
-	private int walletBalance;
 	private String status;
 	
 	public RefundRequest() {
@@ -33,13 +31,13 @@ public class RefundRequest {
 	public int getUserID() {
 		return userID;
 	}
-	public String getStatus() {
-		return status;
-	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
 	public void setID(int id) {
 		this.refundID = id;
+	}
+	public String getStatus() {
+		return status;
 	}
 }
