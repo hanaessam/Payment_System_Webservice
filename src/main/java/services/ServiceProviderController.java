@@ -1,4 +1,4 @@
-package serviceProviders;
+package services;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +14,17 @@ public class ServiceProviderController {
 		this.serviceProviderBsl = serviceProviderBsl;
 	}
 	
-	@PostMapping(value="/serviceProvider")
-	public String addNewServiceProvider(@RequestBody ServiceProvider serviceProvider) {
-		return serviceProviderBsl.addServiceProvider(serviceProvider);
-	}
+//	@PostMapping(value="/serviceProvider")
+//	public String addNewServiceProvider(@RequestBody ServiceProvider serviceProvider) {
+//		return serviceProviderBsl.addServiceProvider(serviceProvider);
+//	}
 	
 	@GetMapping(value="/serviceProvider/{id}")
 	public ServiceProvider getServiceProvider(@PathVariable("id") int id) {
 		return serviceProviderBsl.getServiceProvider(id);
-	}	
+	}
+	@GetMapping(value="/serviceProvider/{name}")
+	public ServiceProvider searchServiceProvider(@PathVariable("name") String name) {
+		return serviceProviderBsl.getServiceProvider(name);
+	}
 }

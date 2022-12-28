@@ -17,6 +17,13 @@ public class Authentication {
 			if(userDB.getId() == user.getId()) {
 				return"ID already exist";
 			}
+			if(userDB.getUsername().equals( user.getUsername()))
+			{
+				return"User name already exist";
+			}
+			if(userDB.getEmail().equals(user.getEmail())) {
+				return"Email already exist";
+			}
 		}
 		users.add(user);
 		return"User is added successfully";

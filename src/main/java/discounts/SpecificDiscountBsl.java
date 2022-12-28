@@ -28,6 +28,11 @@ public class SpecificDiscountBsl extends DiscountDecorator{
 				return"Discount ID already exist";
 			}
 		}
+//		for(Integer serviceId : specificDiscount.getServicesId()) {
+//			if(serviceId == ) {
+//				return"Service Id doesn't exist";
+//			}
+//		}
 		specificDiscounts.add(specificDiscount);
 		return"Specific discount is added successfully";
 	}

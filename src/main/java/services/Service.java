@@ -1,13 +1,16 @@
-package serviceProviders;
+package services;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Component;
 
-public class Service {
+@Component
+public abstract class  Service {
 	private int serviceId;
 	private String name;
 	private ArrayList<String> paymentMethods;
 	private static int overallDiscount = 0;
 	private static int specificDiscount = 0;
+	
 	public int getServiceId() {
 		return serviceId;
 	}

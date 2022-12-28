@@ -35,19 +35,20 @@ public class OverallDiscountBsl extends DiscountDecorator{
 	}
 	
 	public OverallDiscount getOverallDiscount(int id) {
-		for(OverallDiscount overallDiscountDB : overallDiscounts) {
+		for(OverallDiscount overallDiscountDB : getOverallDiscounts()) {
 			if(overallDiscountDB.getDiscountId() == id) {
 				return overallDiscountDB;
 			}
 		}
 		return null;
 	}
-	public CreditCard getCreditCard(int cardId) {
-		for(CreditCard creditCardDB : getCreditCards()) {
-			if(creditCardDB.getCardID() == cardId) {
-				return creditCardDB;
-			}
-		}
-		return null;
+	
+
+	public ArrayList<OverallDiscount> getOverallDiscounts() {
+		return overallDiscounts;
 	}
-}
+
+	public void setOverallDiscounts(ArrayList<OverallDiscount> overallDiscounts) {
+		this.overallDiscounts = overallDiscounts;
+	}
+	}

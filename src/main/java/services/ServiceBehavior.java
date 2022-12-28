@@ -1,4 +1,4 @@
-package serviceProviders;
+package services;
 
 public interface ServiceBehavior {
 

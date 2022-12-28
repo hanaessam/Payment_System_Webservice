@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import payment.Wallet;
+
 @RestController
 public class DiscountController {
 	SpecificDiscountBsl specificDiscountBsl;
@@ -25,12 +27,13 @@ public class DiscountController {
 		return specificDiscountBsl.addSpecificDiscount(specificDiscount);
 	}
 	
-	@GetMapping(value="/discount/overall{discountId}")
+	@GetMapping(value="/discount/overall/{discountId}")
 	public OverallDiscount getOverallDiscount(@PathVariable("discountId") int discountId) {
 		return overallDiscountBsl.getOverallDiscount(discountId);
 	}
 	
-	@GetMapping(value="/discount/specific{discountId}")
+
+	@GetMapping(value="/discount/specific/{discountId}")
 	public SpecificDiscount getSpecificDiscount(@PathVariable("discountId") int discountId) {
 		return specificDiscountBsl.getSpecificDiscount(discountId);
 	}
