@@ -39,5 +39,4 @@ public class Authentication {
 		}
 		return "User is not found!";
 	}
-  
 }

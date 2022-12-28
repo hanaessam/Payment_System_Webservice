@@ -22,7 +22,5 @@ public class ServiceProviderController {
 	@GetMapping(value="/serviceProvider/{id}")
 	public ServiceProvider getServiceProvider(@PathVariable("id") int id) {
 		return serviceProviderBsl.getServiceProvider(id);
-	}
-	
-	
+	}	
 }

@@ -15,7 +15,6 @@ public class PaymentController {
 	CreditCardBsl creditCardBsl;
 	WalletBsl walletBsl;
 	CashBsl cashBsl;
-	User user;
 	static int transactionID=0;
 	
 	public PaymentController(CreditCardBsl creditCardBsl, WalletBsl walletBsl, CashBsl cashBsl) {

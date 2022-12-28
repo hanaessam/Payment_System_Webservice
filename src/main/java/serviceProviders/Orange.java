@@ -1,8 +1,8 @@
 package serviceProviders;
 
-public class Orange {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Orange extends ServiceProvider{
 	
 }
-//name 
-//discount flag
-//object discount

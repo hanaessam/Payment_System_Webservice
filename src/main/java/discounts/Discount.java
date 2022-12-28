@@ -1,6 +1,8 @@
 package discounts;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface Discount {
-	
-	public String addDiscount(int price);
+	public float calculateDicount(int price);
 }

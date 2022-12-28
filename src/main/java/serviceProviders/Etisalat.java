@@ -1,5 +1,8 @@
 package serviceProviders;
 
-public class Etisalat {
+import org.springframework.stereotype.Component;
 
+@Component
+public class Etisalat extends ServiceProvider{
+	
 }

@@ -1,47 +1,33 @@
 package serviceProviders;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class ServiceProvider {
-	private int id;
 	private String name;
-	private ArrayList<String> paymentMethods;
-	private boolean hasDiscount;
+	private int providerId;
+	
 	public ServiceProvider() {
-		this.id = id;
+	this.name = name;
+	this.providerId = providerId;
+	}
+	public ServiceProvider(String name, int providerId) {
 		this.name = name;
-		paymentMethods = new ArrayList<>();
-		this.hasDiscount = hasDiscount;
+		this.providerId = providerId;
 	}
-	public int getId() {
-		return id;
+	
+	public int getProviderId() {
+		return providerId;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setProviderId(int providerId) {
+		this.providerId = providerId;
 	}
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<String> getPaymentMethods() {
-		return paymentMethods;
-	}
-	public void setPaymentMethods(ArrayList<String> paymentMethods) {
-		this.paymentMethods = paymentMethods;
-	}
-	public boolean isHasDiscount() {
-		return hasDiscount;
-	}
-	public void setHasDiscount(boolean hasDiscount) {
-		this.hasDiscount = hasDiscount;
-	}
-	
-	
 }

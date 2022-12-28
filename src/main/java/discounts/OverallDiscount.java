@@ -1,19 +1,32 @@
 package discounts;
 
-public class OverallDiscount extends DiscountDecorator{
-	private int price;
+import org.springframework.stereotype.Component;
+
+@Component
+public class OverallDiscount{
 	private int percent;
+	private int discountId;
 	
-	public OverallDiscount(Discount discount) {
-		super(discount);
-		this.discount = discount;
+	public OverallDiscount() {
+		this.percent = percent;
+		this.discountId = discountId;
+	}
+	
+	public OverallDiscount(int percent, int discountId) {
+		this.percent = percent;
+		this.discountId = discountId;
 	}
 
-	@Override
-	public String addDiscount(int price) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getPercent() {
+		return percent;
 	}
-	
-	
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+	public int getDiscountId() {
+		return discountId;
+	}
+	public void setDiscountId(int discountId) {
+		this.discountId = discountId;
+	}
 }
