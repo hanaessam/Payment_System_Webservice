@@ -9,8 +9,8 @@ public class LandLine implements Service{
 	
 	public LandLine() {
 		super();
-		this.serviceId = 1;
-		this.name = "MobileRecharge";
+		this.serviceId = 3;
+		this.name = "Landline";
 		this.overallDiscount = 0;
 		this.specificDiscount = 0;
 	}

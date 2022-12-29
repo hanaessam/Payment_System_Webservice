@@ -10,8 +10,8 @@ public class Donations implements Service {
 	
 	public Donations() {
 		super();
-		this.serviceId = 1;
-		this.name = "MobileRecharge";
+		this.serviceId = 4;
+		this.name = "Donations";
 		this.overallDiscount = 0;
 		this.specificDiscount = 0;
 	}

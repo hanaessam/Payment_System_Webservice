@@ -9,8 +9,8 @@ public class InternetPayment implements Service{
 	
 	public InternetPayment() {
 		super();
-		this.serviceId = 1;
-		this.name = "MobileRecharge";
+		this.serviceId = 2;
+		this.name = "Internet Payment";
 		this.overallDiscount = 0;
 		this.specificDiscount = 0;
 	}

@@ -32,21 +32,18 @@ public class SpecificDiscountBsl extends DiscountDecorator{
 			if(serviceId == 1) {
 				services.ServiceController.getMobileRecharge().setSpecificDiscount(specificDiscount.getPercent());
 			}
-			else if(serviceId == 2) {
+			if(serviceId == 2) {
 				services.ServiceController.getInternetPayment().setSpecificDiscount(specificDiscount.getPercent());
 			}
-			else if(serviceId == 3) {
+			if(serviceId == 3) {
 				services.ServiceController.getLandline().setSpecificDiscount(specificDiscount.getPercent());
-			}
-			else if(serviceId == 4) {
-				services.ServiceController.getDonations().setSpecificDiscount(specificDiscount.getPercent());
 			}
 			else {
 				return "Service"+serviceId+" Id not found";
 			}
 		}
 		specificDiscounts.add(specificDiscount);
-		return"Specific discount is added successfully";
+		return "Specific discount is added successfully";
 	}
 	
 	public SpecificDiscount getSpecificDiscount(int id) {
