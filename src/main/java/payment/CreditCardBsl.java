@@ -3,6 +3,8 @@ package payment;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
+import services.MobileRecharge;
+
 @Service
 public class CreditCardBsl {
 	private static ArrayList<CreditCard> creditCards;
@@ -29,10 +31,11 @@ public class CreditCardBsl {
 	public String calculatePayment(Payment creditCard, int transactionID) {
 		if(security.Authentication.getUser(((CreditCard)creditCard).getUserId())==null)
 			return "User not found.";
-		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()<((CreditCard)creditCard).getAmount()) {
+		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()< MobileRecharge.getAmount()) {
 			return "Not enough credit";
 		}
 		((CreditCard)creditCard).setTransactionID(transactionID);
+		((CreditCard)creditCard).setAmount(MobileRecharge.getAmount());
 		getCreditCards().add(((CreditCard)creditCard));
 		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmount();
 		((CreditCard)creditCard).setBalance(creditBalance);
@@ -64,6 +67,14 @@ public class CreditCardBsl {
 	public static CreditCard getCreditCardByTransaction(int transactionId) {
 		for(CreditCard creditCardDB : getCreditCards()) {
 			if(creditCardDB.getTransactionID() == transactionId) {
+				return creditCardDB;
+			}
+		}
+		return null;
+	}
+	public static CreditCard getCreditCardByUserId(int userId) {
+		for(CreditCard creditCardDB : getCreditCards()) {
+			if(creditCardDB.getUserId() == userId) {
 				return creditCardDB;
 			}
 		}

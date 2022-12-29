@@ -9,6 +9,8 @@ public class Wallet implements Payment{
 	private  int amount;
 	private String serviceName;
 	private int id;
+	private int walletBalance;
+	
 	public String getserviceName() {
 		return serviceName;
 	}

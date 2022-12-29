@@ -9,7 +9,6 @@ public class WalletBsl{
 	static ArrayList<Wallet> wallets;
 	
 	public WalletBsl() {
-		// TODO Auto-generated constructor stub
 		wallets = new ArrayList<>();
 	}
 	
@@ -28,6 +27,7 @@ public class WalletBsl{
 	}
 	
 	public Wallet getWallet(int id) {
+	
 		for(Wallet walletDB : wallets) {
 			if(walletDB.getUserId() == id) {
 				return walletDB;
