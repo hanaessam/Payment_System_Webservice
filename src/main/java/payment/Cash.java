@@ -11,13 +11,14 @@ public class Cash implements Payment{
 	public int getTransactionId() {
 		return transactionId;
 	}
-	public String getserviceName() {
+	public String getServiceName() {
 		return serviceName;
 	}
 	
-	public void setserviceName(String serviceName) {
+	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
+	
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}

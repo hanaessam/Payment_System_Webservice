@@ -8,15 +8,15 @@ public class CreditCard implements Payment{
 	private int cardId;
 	private int userId;
 	private int balance;
-	private static int amount;
+	private int amount;
 	private String serviceName;
 	public CreditCard() {
-		this.transactionId = transactionId;
-		this.cardId = cardId;
-		this.userId = userId;
+		this.transactionId = 0;
+		this.cardId = 0;
+		this.userId = 0;
 		this.balance = 0;
-		this.amount = amount;
-		this.serviceName = serviceName;
+		this.amount = 0;
+		this.serviceName = " ";
 	}
 	public CreditCard(int transactionId, int cardId, int userId, int balance, int amount ,String serviceName ){
 		this.transactionId = transactionId;
@@ -32,7 +32,7 @@ public class CreditCard implements Payment{
 	public int getTransactionID() {
 		return transactionId;
 	}
-	public static int getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 	public int getBalance() {

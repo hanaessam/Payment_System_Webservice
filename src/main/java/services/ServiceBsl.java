@@ -9,13 +9,13 @@ import payment.CreditCardBsl;
 import security.Authentication;
 @Service
 public class ServiceBsl {
-	static ArrayList<MobileRecharge>  mobileRecharges;
+	static MobileRecharge mobileRecharge;
 	static InternetPayment internetPayment;
 	static Donations donations;
 	static LandLine landLine;
 
 	public ServiceBsl() {
-		mobileRecharges = new ArrayList<>();
+		mobileRecharge = new MobileRecharge();
 	}
 //	public String addServiceProvider(ServiceProvider serviceProvider) {
 //		for(ServiceProvider serviceProviderDB : serviceProviders) {
@@ -51,45 +51,37 @@ public class ServiceBsl {
 //	}
 	
 	
-		public String addMobileRecharge(MobileRecharge mobileRecharge) {
-	//		mobileRecharge.setAmount(payment.CreditCardBsl.getCreditCardByUserId(mobileRecharge.getUserId()).getAmount());
-			if(security.Authentication.getUser(mobileRecharge.getUserId())==null)
-				return "User not found.";
-			
-			getMobileRecharges().add(mobileRecharge);
-			return "Success!\n your amount: "+ mobileRecharge.getAmount() +" .";
-		}
-	
-	public static ArrayList<MobileRecharge> getMobileRecharges() {
-		return mobileRecharges;
-	}
-
-	
-	public static MobileRecharge getMobileRecharge(int userId) {
-		for(MobileRecharge mobileRechargeDB : getMobileRecharges()) {
-			if(mobileRechargeDB.getUserId() == userId) {
-				return mobileRechargeDB;
-			}
-		}
-		return null;
+//	public String addMobileRecharge(MobileRecharge mobileRecharge) {
+////		mobileRecharge.setAmount(payment.CreditCardBsl.getCreditCardByUserId(mobileRecharge.getUserId()).getAmount());
+//		if(security.Authentication.getUser(mobileRecharge.getUserId())==null)
+//			return "User not found.";		
+//		getMobileRecharges().add(mobileRecharge);
+//		return "Success!\n your amount: "+ mobileRecharge.getAmount() +" .";
+//	}
+//	
+//	public static ArrayList<MobileRecharge> getMobileRecharges() {
+//		return mobileRecharges;
+//	}	
+	public static MobileRecharge getMobileRecharge() {
+		return mobileRecharge;
 	}
 	
-	public InternetPayment getInternetPayment(int id) {
-		if(id == 2) {
-			return internetPayment;
-		}
-		return null;
-	}
-	public LandLine getLandLine(int id) {
-		if(id == 3) {
-			return landLine;
-		}
-		return null;
-	}
-	public Donations getDonations(int id) {
-		if(id == 4) {
-			return donations;
-		}
-		return null;
-	}
+//	public InternetPayment getInternetPayment(int id) {
+//		if(id == 2) {
+//			return internetPayment;
+//		}
+//		return null;
+//	}
+//	public LandLine getLandLine(int id) {
+//		if(id == 3) {
+//			return landLine;
+//		}
+//		return null;
+//	}
+//	public Donations getDonations(int id) {
+//		if(id == 4) {
+//			return donations;
+//		}
+//		return null;
+//	}
 }

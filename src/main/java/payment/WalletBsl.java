@@ -12,7 +12,7 @@ public class WalletBsl{
 		wallets = new ArrayList<>();
 	}
 	
-	public String calculatePayment(Payment wallet, int transactionID) {
+	public static String calculatePayment(Payment wallet, int transactionID) {
 		if(security.Authentication.getUser(((Wallet)wallet).getUserId())==null)
 			return "User not found.";	
 		int walletBalance = security.Authentication.getUser(((Wallet)wallet).getUserId()).getWalletBalance();
@@ -42,5 +42,9 @@ public class WalletBsl{
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<Wallet> getWallets() {
+		return wallets;
 	}
 }

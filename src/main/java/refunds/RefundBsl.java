@@ -54,7 +54,7 @@ public class RefundBsl {
 	
 	public String checkRefund(int id){
 		for(RefundRequest requestDB : refundRequests) {
-			if(requestDB.getUserID() == id) {
+			if(requestDB.getTransactionID() == id) {
 				return "Refund request is found";
 			}
 		}

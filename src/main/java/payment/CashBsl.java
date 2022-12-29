@@ -6,22 +6,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CashBsl {
-	static ArrayList<Cash> cash;
+	static ArrayList<Cash> cashs;
 	public CashBsl() {
 		// TODO Auto-generated constructor stub
-		cash = new ArrayList<>();
+		cashs = new ArrayList<>();
 	}
 	
-	public String calculatePayment(Payment cash, int transactionID) {
+	public static String calculatePayment(Payment cash, int transactionID) {
 		if(security.Authentication.getUser( ((Cash)cash).getUserId())==null)
 			return "User not found.";
 		((Cash)cash).setTransactionId(transactionID);
-		this.cash.add(((Cash)cash));
+		cashs.add(((Cash)cash));
 		return "Please pay "+ ((Cash)cash).getAmount() + " cash.";
 	}
 	
 	public Cash getCash(int id) {
-		for(Cash cashDB : cash) {
+		for(Cash cashDB : cashs) {
 			if(cashDB.getUserId() == id) {
 				return cashDB;
 			}
@@ -30,11 +30,18 @@ public class CashBsl {
 	}
 	
 	public static Cash getCashByTransaction(int transactionId) {
-		for(Cash cashDB : cash) {
+		for(Cash cashDB : cashs) {
 			if(cashDB.getTransactionId() == transactionId) {
 				return cashDB;
 			}
 		}
 		return null;
 	}
+	public ArrayList<Cash> getCashs() {
+		return cashs;
+	}
+
+//	public static void setCashs(ArrayList<Cash> cashs) {
+//		this.cashs = cashs;
+//	}
 }
