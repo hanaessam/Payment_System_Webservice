@@ -19,9 +19,21 @@ public class ServiceProviderController {
 //		return serviceProviderBsl.addServiceProvider(serviceProvider);
 //	}
 	
-	@GetMapping(value="/serviceProvider/015")
-	public We getServiceProvider() {
+	@GetMapping(value="/serviceProvider/15")
+	public We getServiceProviderWe() {
 		return serviceProviderBsl.getWe();
+	}
+	@GetMapping(value="/serviceProvider/12")
+	public Orange getServiceProviderOrange() {
+		return serviceProviderBsl.getOrange();
+	}
+	@GetMapping(value="/serviceProvider/11")
+	public Etisalat getServiceProviderEtisalat() {
+		return serviceProviderBsl.getEtisalat();
+	}
+	@GetMapping(value="/serviceProvider/10")
+	public Vodafone getServiceProviderVodafone() {
+		return serviceProviderBsl.getVodafone();
 	}
 //	@GetMapping(value="/serviceProvider/{name}")
 //	public ServiceProvider searchServiceProvider(@PathVariable("name") String name) {

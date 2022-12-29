@@ -11,6 +11,14 @@ public class ServiceProviderBsl {
 	static Vodafone vodafone;
 	static Etisalat etisalat;
 	static Orange orange;
+//	static ArrayList<ServiceProvider> serviceProviders;
+//	public  ArrayList<ServiceProvider> getServiceProviders() {
+//		return serviceProviders;
+//	}
+//
+//	public  void setServiceProviders(ArrayList<ServiceProvider> serviceProviders) {
+//	         serviceProviders = serviceProviders;
+//	}
 
 	public ServiceProviderBsl() {
 		we = new We();
@@ -32,6 +40,25 @@ public class ServiceProviderBsl {
 		return orange;
 	}
 	
+//	public  String addServiceProvider(String name) {
+//		if(name== "we") {
+//			serviceProviders.add(we);
+//		
+//		}
+//		if(name== "etisalt") {
+//			serviceProviders.add(etisalat);
+//		
+//		}
+//		if(name== "vodafone") {
+//			serviceProviders.add(vodafone);
+//		
+//		}
+//		if(name== "orange") {
+//			serviceProviders.add(orange);
+//			
+//		}
+//		return name;
+//	}
 //	public String addServiceProvider(ServiceProvider serviceProvider) {
 //		for(ServiceProvider serviceProviderDB : serviceProviders) {
 //			if(serviceProviderDB.getName().equals(serviceProvider.getName())) {

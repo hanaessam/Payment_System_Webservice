@@ -1,5 +1,8 @@
 package services;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InternetPayment implements Service{
 	private int serviceId;
 	private String name ;

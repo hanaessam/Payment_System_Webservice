@@ -20,15 +20,24 @@ import payment.Wallet;
 @RestController
 public class ServiceController {
 	ServiceBsl serviceBsl;
+	 static ServiceProviderBsl serviceProviderBsl ;
 	Discount discount;
 	static int transactionID = 0;
 	
 	public ServiceController(ServiceBsl serviceBsl) {
 		this.serviceBsl = serviceBsl;
 	}
-		
+	
+//	@GetMapping(value="/service/mobileRecharge/{provider}")
+//	public static MobileRecharge getMobileRecharge(@PathVariable("provider") String provider) {
+//	//	serviceProviderBsl.addServiceProvider(provider);
+//		  //ServiceBsl.getMobileRecharge().setServiceProviders(provider);
+//		//serviceProviderBsl.addServiceProvider(provider);
+//		return  ServiceBsl.getMobileRecharge();
+//	}
 	@GetMapping(value="/service/mobileRecharge")
 	public static MobileRecharge getMobileRecharge() {
+	
 		return  ServiceBsl.getMobileRecharge();
 	}
 	
@@ -47,6 +56,7 @@ public class ServiceController {
 			((DiscountDecorator)discount).percent = ServiceBsl.getMobileRecharge().getOverallDiscount();
 			creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
 		}
+		
 		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
 	
@@ -148,6 +158,8 @@ public class ServiceController {
 		public static Donations getDonations() {
 			return  ServiceBsl.getDonations();
 		}
+		
+		
 		
 			@PostMapping(value="/service/Donations/payCredit")
 			public String addDonation(@RequestBody CreditCard creditCard) {
