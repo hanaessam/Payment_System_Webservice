@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreditCardBsl {
 	private static ArrayList<CreditCard> creditCards;
+//	private ArrayList<Wallet> addToWalletTransactions;
 	public CreditCardBsl() {
 		creditCards = new ArrayList<>();
 	}
@@ -28,6 +29,7 @@ public class CreditCardBsl {
 				}
 				int walletBalance = security.Authentication.getUser(getCreditCard(id).getUserId()).getWalletBalance();
 				security.Authentication.getUser(getCreditCard(id).getUserId()).setWalletBalance(walletBalance+funds);
+//				add to wallet transactions 
 				break;
 			}
 		}

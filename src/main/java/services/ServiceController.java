@@ -148,22 +148,12 @@ public class ServiceController {
 		public static Donations getDonations() {
 			return  ServiceBsl.getDonations();
 		}
-			
+		
 			@PostMapping(value="/service/Donations/payCredit")
 			public String addDonation(@RequestBody CreditCard creditCard) {
 				creditCard.setAmountAfterDiscount(creditCard.getAmount());
 				transactionID++;
 				creditCard.setServiceName(ServiceBsl.donations.getName());
-				if(ServiceBsl.getInternetPayment().getSpecificDiscount() != 0) {
-					discount = new SpecificDiscountBsl(discount);
-					((DiscountDecorator)discount).percent = ServiceBsl.getDonations().getSpecificDiscount();
-					creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmount()));
-				}
-				if(ServiceBsl.getDonations().getOverallDiscount() != 0) {
-					discount = new OverallDiscountBsl(discount);
-					((DiscountDecorator)discount).percent = ServiceBsl.getDonations().getOverallDiscount();
-					creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
-				}
 				return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 			}
 			

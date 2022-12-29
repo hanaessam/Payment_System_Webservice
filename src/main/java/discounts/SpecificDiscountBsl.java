@@ -32,14 +32,13 @@ public class SpecificDiscountBsl extends DiscountDecorator{
 			if(serviceId == 1) {
 				services.ServiceController.getMobileRecharge().setSpecificDiscount(specificDiscount.getPercent());
 			}
-			if(serviceId == 2) {
+			else if(serviceId == 2) {
 				services.ServiceController.getInternetPayment().setSpecificDiscount(specificDiscount.getPercent());
 			}
-			if(serviceId == 3) {
+			else if(serviceId == 3) {
 				services.ServiceController.getLandline().setSpecificDiscount(specificDiscount.getPercent());
-			}
-			else {
-				return "Service"+serviceId+" Id not found";
+			} else if(serviceId != 1 || serviceId !=2 || serviceId!=3){
+				return "Service "+serviceId+" Id not found";
 			}
 		}
 		specificDiscounts.add(specificDiscount);

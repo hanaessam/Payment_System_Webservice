@@ -19,12 +19,12 @@ public class ServiceProviderController {
 //		return serviceProviderBsl.addServiceProvider(serviceProvider);
 //	}
 	
-	@GetMapping(value="/serviceProvider/{id}")
-	public ServiceProvider getServiceProvider(@PathVariable("id") int id) {
-		return serviceProviderBsl.getServiceProvider(id);
+	@GetMapping(value="/serviceProvider/015")
+	public We getServiceProvider() {
+		return serviceProviderBsl.getWe();
 	}
-	@GetMapping(value="/serviceProvider/{name}")
-	public ServiceProvider searchServiceProvider(@PathVariable("name") String name) {
-		return serviceProviderBsl.getServiceProvider(name);
-	}
+//	@GetMapping(value="/serviceProvider/{name}")
+//	public ServiceProvider searchServiceProvider(@PathVariable("name") String name) {
+//		return serviceProviderBsl.getServiceProvider(name);
+//	}
 }
