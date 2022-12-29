@@ -37,12 +37,12 @@ public class CreditCardBsl {
 	public static String calculatePayment(Payment creditCard, int transactionID) {
 		if(security.Authentication.getUser(((CreditCard)creditCard).getUserId())==null)
 			return "User not found.";
-		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()<((CreditCard)creditCard).getAmount()) {
+		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()<((CreditCard)creditCard).getAmountAfterDiscount()) {
 			return "Not enough credit";
 		}
 		((CreditCard)creditCard).setTransactionID(transactionID);
 		creditCards.add(((CreditCard)creditCard));
-		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmount();
+		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmountAfterDiscount();
 		((CreditCard)creditCard).setBalance(creditBalance);
 		return "Success!\nNew credit balance: "+ creditBalance;
 	}

@@ -17,7 +17,7 @@ public class CashBsl {
 			return "User not found.";
 		((Cash)cash).setTransactionId(transactionID);
 		cashs.add(((Cash)cash));
-		return "Please pay "+ ((Cash)cash).getAmount() + " cash.";
+		return "Please pay "+ ((Cash)cash).getAmountAfterDiscount() + " cash.";
 	}
 	
 	public Cash getCash(int id) {

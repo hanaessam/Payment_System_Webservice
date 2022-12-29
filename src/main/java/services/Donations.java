@@ -2,67 +2,57 @@ package services;
 
 
 public class Donations implements Service {
+	private int serviceId;
+	private String name ;
+	private String[] paymentMethods = {"credit","cash"};
+	private int overallDiscount = 0;
+	private int specificDiscount = 0;
+	
+	public Donations() {
+		super();
+		this.serviceId = 1;
+		this.name = "MobileRecharge";
+		this.overallDiscount = 0;
+		this.specificDiscount = 0;
+	}
 
-	@Override
+	public Donations(int serviceId, String name, String[] paymentMethods, int overallDiscount,int specificDiscount) {
+		super();
+		this.serviceId = serviceId;
+		this.name = name;
+		this.paymentMethods = paymentMethods;
+		this.overallDiscount = overallDiscount;
+		this.specificDiscount = specificDiscount;
+	}
+
 	public int getServiceId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return serviceId;
 	}
-
-	@Override
 	public void setServiceId(int serviceId) {
-		// TODO Auto-generated method stub
-		
+		this.serviceId = serviceId;
 	}
-
-	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
-
-	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
-
-	@Override
 	public String[] getPaymentMethods() {
-		// TODO Auto-generated method stub
-		return null;
+		return paymentMethods;
 	}
-
-	@Override
 	public void setPaymentMethods(String[] paymentMethods) {
-		// TODO Auto-generated method stub
-		
+		this.paymentMethods = paymentMethods;
 	}
-
-	@Override
 	public int getOverallDiscount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return overallDiscount;
 	}
-
-	@Override
 	public void setOverallDiscount(int overallDiscount) {
-		// TODO Auto-generated method stub
-		
+		this.overallDiscount = overallDiscount;
 	}
-
-	@Override
 	public int getSpecificDiscount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return specificDiscount;
 	}
-
-	@Override
 	public void setSpecificDiscount(int specificDiscount) {
-		// TODO Auto-generated method stub
-		
+		this.specificDiscount = specificDiscount;
 	}
-	
-	
-
 }

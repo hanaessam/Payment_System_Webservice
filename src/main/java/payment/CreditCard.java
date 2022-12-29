@@ -9,13 +9,16 @@ public class CreditCard implements Payment{
 	private int userId;
 	private int balance;
 	private int amount;
+	private int amountAfterDiscount;
 	private String serviceName;
+	
 	public CreditCard() {
 		this.transactionId = 0;
 		this.cardId = 0;
 		this.userId = 0;
 		this.balance = 0;
 		this.amount = 0;
+		this.amountAfterDiscount = 0;
 		this.serviceName = " ";
 	}
 	public CreditCard(int transactionId, int cardId, int userId, int balance, int amount ,String serviceName ){
@@ -63,5 +66,10 @@ public class CreditCard implements Payment{
 	public String getServiceName() {
 		return serviceName;
 	}
-	
+	public int getAmountAfterDiscount() {
+		return amountAfterDiscount;
+	}
+	public void setAmountAfterDiscount(int amountAfterDiscount) {
+		this.amountAfterDiscount = amountAfterDiscount;
+	}
 }

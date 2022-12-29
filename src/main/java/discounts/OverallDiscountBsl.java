@@ -19,7 +19,7 @@ public class OverallDiscountBsl extends DiscountDecorator{
 		super(discount);
 		this.discount = discount;
 	}
-	public float calculateDicount(int price) {
+	public float calculateDiscount(int price) {
 		float result= price - (((float)(percent)/100 * price));
 		return result;
 	}
@@ -30,6 +30,9 @@ public class OverallDiscountBsl extends DiscountDecorator{
 				return"Discount ID already exist";
 			}
 		}
+		services.ServiceController.getMobileRecharge().setOverallDiscount(overallDiscount.getPercent());
+		services.ServiceController.getInternetPayment() .setOverallDiscount(overallDiscount.getPercent());
+		services.ServiceController.getLandline().setOverallDiscount(overallDiscount.getPercent());
 		overallDiscounts.add(overallDiscount);
 		return"Overall discount is added successfully";
 	}

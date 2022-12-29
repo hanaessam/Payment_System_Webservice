@@ -16,12 +16,12 @@ public class WalletBsl{
 		if(security.Authentication.getUser(((Wallet)wallet).getUserId())==null)
 			return "User not found.";	
 		int walletBalance = security.Authentication.getUser(((Wallet)wallet).getUserId()).getWalletBalance();
-		if(walletBalance == 0 || walletBalance<((Wallet)wallet).getAmount()) {
+		if(walletBalance == 0 || walletBalance<((Wallet)wallet).getAmountAfterDiscount()) {
 			return "Not enough points in wallet";
 		}
 		((Wallet)wallet).setTransactionId(transactionID);
 		wallets.add(((Wallet)wallet));
-		walletBalance-=((Wallet)wallet).getAmount();
+		walletBalance-=((Wallet)wallet).getAmountAfterDiscount();
 		security.Authentication.getUser(((Wallet)wallet).getUserId()).setWalletBalance(walletBalance);
 		return "Success!\nNew wallet balance: "+ walletBalance;
 	}

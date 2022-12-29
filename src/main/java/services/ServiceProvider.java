@@ -8,8 +8,8 @@ public class ServiceProvider {
 	private int providerId;
 	
 	public ServiceProvider() {
-	this.name = name;
-	this.providerId = providerId;
+		this.name = name;
+		this.providerId = providerId;
 	}
 	public ServiceProvider(String name, int providerId) {
 		this.name = name;

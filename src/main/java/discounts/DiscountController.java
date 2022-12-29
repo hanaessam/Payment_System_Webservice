@@ -32,7 +32,6 @@ public class DiscountController {
 		return overallDiscountBsl.getOverallDiscount(discountId);
 	}
 	
-
 	@GetMapping(value="/discount/specific/{discountId}")
 	public SpecificDiscount getSpecificDiscount(@PathVariable("discountId") int discountId) {
 		return specificDiscountBsl.getSpecificDiscount(discountId);
