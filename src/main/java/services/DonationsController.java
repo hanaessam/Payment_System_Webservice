@@ -12,15 +12,15 @@ DonationsBsl donationsBsl;
 	}
 
 	@GetMapping(value="/serviceProvider/57357")
-	public CancerHospital getServiceProviderWe() {
+	public CancerHospital getCancerHospital() {
 		return donationsBsl.getCancerHospital();
 	}
 	@GetMapping(value="/serviceProvider/10")
-	public Schools getServiceProviderOrange() {
+	public Schools getSchools() {
 		return donationsBsl.getSchools();
 	}
 	@GetMapping(value="/serviceProvider/5")
-	public NGOs getServiceProviderEtisalat() {
+	public NGOs getNGOs() {
 		return donationsBsl.getNGOs();
 	}
 	

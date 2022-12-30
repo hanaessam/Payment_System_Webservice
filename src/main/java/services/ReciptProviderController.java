@@ -14,11 +14,11 @@ public class ReciptProviderController {
     }
 	
 	@GetMapping(value="/receipt/4")
-	public QuarterlyReceipt getServiceProviderWe() {
+	public QuarterlyReceipt getQuarterlyReceipt() {
 		return reciptProviderBsl.getquarterlyReceipt();
 	}
 	@GetMapping(value="/receipt/1")
-	public MonthlyReceipt getServiceProviderOrange() {
+	public MonthlyReceipt getMonthlyReceipt() {
 		return reciptProviderBsl.getmonthlyReceipt();
 	}
 	

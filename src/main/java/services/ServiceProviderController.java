@@ -14,10 +14,6 @@ public class ServiceProviderController {
 		this.serviceProviderBsl = serviceProviderBsl;
 	}
 	
-//	@PostMapping(value="/serviceProvider")
-//	public String addNewServiceProvider(@RequestBody ServiceProvider serviceProvider) {
-//		return serviceProviderBsl.addServiceProvider(serviceProvider);
-//	}
 	
 	@GetMapping(value="/serviceProvider/15")
 	public We getServiceProviderWe() {
@@ -35,8 +31,5 @@ public class ServiceProviderController {
 	public Vodafone getServiceProviderVodafone() {
 		return serviceProviderBsl.getVodafone();
 	}
-//	@GetMapping(value="/serviceProvider/{name}")
-//	public ServiceProvider searchServiceProvider(@PathVariable("name") String name) {
-//		return serviceProviderBsl.getServiceProvider(name);
-//	}
+
 }

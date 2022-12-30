@@ -10,18 +10,8 @@ public class MobileRecharge implements Service{
 	private String[] paymentMethods = {"credit","cash","wallet"};
 	private int overallDiscount = 0;
 	private int specificDiscount = 0;
-	//public static ArrayList<ServiceProvider> serviceProviders;
 	ServiceProviderBsl serviceProviderBsl;
 	
-	
-//	
-//	public  ArrayList<ServiceProvider> getServiceProviders() {
-//		return serviceProviders;
-//	}
-//
-//	 public   void setServiceProviders(String name) {
-//		serviceProviders = serviceProviderBsl.addServiceProvider(name);
-//	}
 
 	public MobileRecharge() {
 		super();
@@ -29,7 +19,7 @@ public class MobileRecharge implements Service{
 		this.name = "MobileRecharge";
 		this.overallDiscount = 0;
 		this.specificDiscount = 0;
-		//serviceProviders= new ArrayList<>();
+		
 	}
 
 	public MobileRecharge(int serviceId, String name, String[] paymentMethods, int overallDiscount,int specificDiscount) {

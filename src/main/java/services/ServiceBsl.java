@@ -29,25 +29,5 @@ public class ServiceBsl {
 		return donations;
 	}
 	
-//	public String addServiceProvider(ServiceProvider serviceProvider) {
-//		for(ServiceProvider serviceProviderDB : serviceProviders) {
-//			if(serviceProviderDB.getName().equals(serviceProvider.getName())) {
-//					return "This service provider already exists!";	
-//			}
-//		}
-//		serviceProviders.add(serviceProvider);
-//		return "Service provider: " +serviceProvider.getName()+ " added successfully!";
-//	}
 
-//	public Service searchService(String name) {
-//		if(name.equals("MobileRecharge"))
-//			return (Service) mobileRecharge;
-//		else if(name.equals("InternetPayment"))
-//			return (Service) internetPayment;
-//		else if(name.equals("LandLine"))
-//			return (Service) landLine;
-//		else if(name.equals("Donation"))
-//			return (Service) donations;
-//		return null;
-//	}
 }
