@@ -8,10 +8,10 @@
 
 >File -> Import -> Projects form folders or archive
 
- 1. Choose the cloned folder location
- 2. Change perspective on eclipse to Java EE (from the icon on far right
+ 3. Choose the cloned folder location
+ 4. Change perspective on eclipse to Java EE (from the icon on far right
     beside the search icon)
- 3. After opening the project folder in the eclipse click run
+ 5. After opening the project folder in the eclipse click run
 
 > if there's a maven jar file missing please download it from here (download v3.0.0) : 
 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web 
