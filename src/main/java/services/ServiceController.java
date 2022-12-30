@@ -161,29 +161,9 @@ public class ServiceController {
 	public static LandLine getLandline() {
 		return  ServiceBsl.getLandLine();
 	}
-		
-//		@PostMapping(value="/service/Landline/payCredit/{providerId}")
-//		public String addLandline(@RequestBody CreditCard creditCard , @PathVariable("providerId") int providerId) {
-//			creditCard.setAmountAfterDiscount(creditCard.getAmount());
-//			transactionID++;
-//			creditCard.setServiceName(ServiceBsl.landLine.getName());
-//			if(ServiceBsl.getLandLine().getSpecificDiscount() != 0) {
-//				discount = new SpecificDiscountBsl(discount);
-//				((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getSpecificDiscount();
-//				creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmount()));
-//			}
-//			if(ServiceBsl.getLandLine().getOverallDiscount() != 0) {
-//				discount = new OverallDiscountBsl(discount);
-//				((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getOverallDiscount();
-//				creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
-//			}
-//			if(!services.ServiceProviderBsl.check(providerId))
-//				return "Provider not found";
-//			return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
-//		}
-		
-		@PostMapping(value="/service/Landline/payCash/{providerId}")
-		public String addLandline(@RequestBody Cash cash , @PathVariable("providerId") int providerId) {
+
+		@PostMapping(value="/service/Landline/payCash/{receiptId}")
+		public String addLandline(@RequestBody Cash cash , @PathVariable("receiptId") int receiptId) {
 			cash.setAmountAfterDiscount(cash.getAmount());
 			transactionID++;
 			cash.setServiceName(ServiceBsl.getLandLine().getName());
@@ -197,14 +177,14 @@ public class ServiceController {
 				((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getOverallDiscount();
 				cash.setAmountAfterDiscount( (int)discount.calculateDiscount(cash.getAmountAfterDiscount()));
 			}
-			if(!services.ServiceProviderBsl.check(providerId))
+			if(!services.ReciptProviderBsl.check(receiptId))
 				return "Provider not found";
 
-			return payment.CashBsl.calculatePayment(cash, transactionID);
+			return services.ReciptProviderBsl.transact(receiptId, cash.getAmountAfterDiscount()) + payment.CashBsl.calculatePayment(cash, transactionID);	
 		}
 		
-		@PostMapping(value="/service/Landline/payWallet/{providerId}")
-		public String addLandline(@RequestBody Wallet wallet, @PathVariable("providerId") int providerId) {
+		@PostMapping(value="/service/Landline/payWallet/{receiptId}")
+		public String addLandline(@RequestBody Wallet wallet, @PathVariable("receiptId") int receiptId) {
 			wallet.setAmountAfterDiscount(wallet.getAmount());
 			transactionID++;
 			wallet.setServiceName(ServiceBsl.getLandLine().getName());
@@ -218,10 +198,10 @@ public class ServiceController {
 				((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getOverallDiscount();
                 wallet.setAmountAfterDiscount( (int)discount.calculateDiscount(wallet.getAmountAfterDiscount()));
 			}
-			if(!services.ServiceProviderBsl.check(providerId))
+			if(!services.ReciptProviderBsl.check(receiptId))
 				return "Provider not found";
 
-			return payment.WalletBsl.calculatePayment(wallet, transactionID);
+			return services.ReciptProviderBsl.transact(receiptId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);	 
 		}
 		
 //------------------------Donations------------------------
@@ -231,24 +211,24 @@ public class ServiceController {
 		return  ServiceBsl.getDonations();
 	}		
 		
-	@PostMapping(value="/service/Donations/payCredit/{providerId}")
-	public String addDonation(@RequestBody CreditCard creditCard, @PathVariable("providerId") int providerId) {
+	@PostMapping(value="/service/Donations/payCredit/{orgId}")
+	public String addDonation(@RequestBody CreditCard creditCard, @PathVariable("orgId") int orgId) {
 		creditCard.setAmountAfterDiscount(creditCard.getAmount());
 		transactionID++;
 		creditCard.setServiceName(ServiceBsl.getDonations().getName());
-		if(!services.ServiceProviderBsl.check(providerId))
-			return "Provider not found";
-		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
+		if(!services.DonationsBsl.check(orgId))
+			return "Orgnization not found";
+		return services.DonationsBsl.transact(orgId, creditCard.getAmountAfterDiscount()) + payment.CreditCardBsl.calculatePayment(creditCard, transactionID);	 
 	}
 
-	@PostMapping(value="/service/Donations/payWallet/{providerId}")
-	public String addDonation(@RequestBody Wallet wallet, @PathVariable("providerId") int providerId) {
+	@PostMapping(value="/service/Donations/payWallet/{orgId}")
+	public String addDonation(@RequestBody Wallet wallet, @PathVariable("orgId") int orgId) {
 		wallet.setAmountAfterDiscount(wallet.getAmount());
 		transactionID++;
 		wallet.setServiceName(ServiceBsl.getDonations().getName());
-		if(!services.ServiceProviderBsl.check(providerId))
-			return "Provider not found";
-		return payment.WalletBsl.calculatePayment(wallet, transactionID);
+		if(!services.DonationsBsl.check(orgId))
+			return "Orgnization not found";
+		return services.DonationsBsl.transact(orgId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);	 
 	}
 			
 //	@PostMapping(value="/service/Donationst/payWallet")

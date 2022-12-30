@@ -1,7 +1,10 @@
 package services;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Donations implements Service {
+
 	private int serviceId;
 	private String name ;
 	private String[] paymentMethods = {"credit","wallet"};
