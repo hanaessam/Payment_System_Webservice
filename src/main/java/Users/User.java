@@ -20,7 +20,7 @@ public class User{
 		this.mobileNumber = 0;
 	}
 
-	public User(int id,String username, String password, String email, int walletbalance, int mobilenumber, int homenumber) {
+	public User(int id,String username, String password, String email, int walletbalance, int mobilenumber) {
 		this.id = id;
 		this.username = username;
 		this.password = password;

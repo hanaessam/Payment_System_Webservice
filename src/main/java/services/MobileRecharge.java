@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class MobileRecharge implements Service{
 	private int serviceId;
 	private String name ;
-	private String[] paymentMethods = {"credit","cash"};
+	private String[] paymentMethods = {"credit","cash","wallet"};
 	private int overallDiscount = 0;
 	private int specificDiscount = 0;
 	//public static ArrayList<ServiceProvider> serviceProviders;

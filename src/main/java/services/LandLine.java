@@ -3,7 +3,7 @@ package services;
 public class LandLine implements Service{
 	private int serviceId;
 	private String name ;
-	private String[] paymentMethods = {"credit","cash"};
+	private String[] paymentMethods = {"cash","wallet"};
 	private int overallDiscount = 0;
 	private int specificDiscount = 0;
 	

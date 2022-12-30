@@ -4,7 +4,7 @@ package services;
 public class Donations implements Service {
 	private int serviceId;
 	private String name ;
-	private String[] paymentMethods = {"credit","cash"};
+	private String[] paymentMethods = {"credit","wallet"};
 	private int overallDiscount = 0;
 	private int specificDiscount = 0;
 	
