@@ -13,7 +13,6 @@ public class ReciptProviderController {
     	this.reciptProviderBsl = reciptProviderBsl ;
     }
 	
-	
 	@GetMapping(value="/receipt/4")
 	public QuarterlyReceipt getServiceProviderWe() {
 		return reciptProviderBsl.getquarterlyReceipt();

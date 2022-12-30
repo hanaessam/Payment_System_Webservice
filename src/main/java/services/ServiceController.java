@@ -55,6 +55,8 @@ public class ServiceController {
 		}
 		if(!services.ServiceProviderBsl.check(providerId))
 			return "Provider not found";
+		if(payment.CreditCardBsl.calculatePayment(creditCard, transactionID)=="User not found." || payment.CreditCardBsl.calculatePayment(creditCard, transactionID) == "Not enough credit")
+			return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 		return services.ServiceProviderBsl.transact(providerId, creditCard.getAmountAfterDiscount()) + payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
 	
@@ -75,6 +77,8 @@ public class ServiceController {
 		}
 		if(!services.ServiceProviderBsl.check(providerId))
 			return "Provider not found";
+		if(payment.CashBsl.calculatePayment(cash, transactionID)=="User not found.")
+			return payment.CashBsl.calculatePayment(cash, transactionID);
 		return services.ServiceProviderBsl.transact(providerId, cash.getAmountAfterDiscount()) + payment.CashBsl.calculatePayment(cash, transactionID);	
 	}
 	
@@ -95,7 +99,8 @@ public class ServiceController {
 		}
 		if(!services.ServiceProviderBsl.check(providerId))
 			return "Provider not found";
-		
+		if(payment.WalletBsl.calculatePayment(wallet, transactionID)=="User not found." || payment.WalletBsl.calculatePayment(wallet, transactionID) == "Not enough points in wallet")
+			return payment.WalletBsl.calculatePayment(wallet, transactionID);
 		return services.ServiceProviderBsl.transact(providerId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);
 	} 
 
@@ -123,7 +128,8 @@ public class ServiceController {
 		}
 		if(!services.ServiceProviderBsl.check(providerId))
 			return "Provider not found";
-		
+		if(payment.CreditCardBsl.calculatePayment(creditCard, transactionID)=="User not found." || payment.CreditCardBsl.calculatePayment(creditCard, transactionID) == "Not enough credit")
+			return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
 	
@@ -144,6 +150,8 @@ public class ServiceController {
 		}
 		if(!services.ServiceProviderBsl.check(providerId))
 			return "Provider not found";
+		if(payment.CashBsl.calculatePayment(cash, transactionID)=="User not found.")
+			return payment.CashBsl.calculatePayment(cash, transactionID);
 		return payment.CashBsl.calculatePayment(cash, transactionID);
 	}
 	
@@ -179,7 +187,8 @@ public class ServiceController {
 			}
 			if(!services.ReciptProviderBsl.check(receiptId))
 				return "Provider not found";
-
+			if(payment.CashBsl.calculatePayment(cash, transactionID)=="User not found.")
+				return payment.CashBsl.calculatePayment(cash, transactionID);
 			return services.ReciptProviderBsl.transact(receiptId, cash.getAmountAfterDiscount()) + payment.CashBsl.calculatePayment(cash, transactionID);	
 		}
 		
@@ -200,6 +209,8 @@ public class ServiceController {
 			}
 			if(!services.ReciptProviderBsl.check(receiptId))
 				return "Provider not found";
+			if(payment.WalletBsl.calculatePayment(wallet, transactionID)=="User not found." || payment.WalletBsl.calculatePayment(wallet, transactionID) == "Not enough points in wallet")
+				return payment.WalletBsl.calculatePayment(wallet, transactionID);
 
 			return services.ReciptProviderBsl.transact(receiptId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);	 
 		}
@@ -218,6 +229,8 @@ public class ServiceController {
 		creditCard.setServiceName(ServiceBsl.getDonations().getName());
 		if(!services.DonationsBsl.check(orgId))
 			return "Orgnization not found";
+		if(payment.CreditCardBsl.calculatePayment(creditCard, transactionID)=="User not found." || payment.CreditCardBsl.calculatePayment(creditCard, transactionID) == "Not enough credit")
+			return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 		return services.DonationsBsl.transact(orgId, creditCard.getAmountAfterDiscount()) + payment.CreditCardBsl.calculatePayment(creditCard, transactionID);	 
 	}
 
@@ -228,6 +241,8 @@ public class ServiceController {
 		wallet.setServiceName(ServiceBsl.getDonations().getName());
 		if(!services.DonationsBsl.check(orgId))
 			return "Orgnization not found";
+		if(payment.WalletBsl.calculatePayment(wallet, transactionID)=="User not found." || payment.WalletBsl.calculatePayment(wallet, transactionID) == "Not enough points in wallet")
+			return payment.WalletBsl.calculatePayment(wallet, transactionID);
 		return services.DonationsBsl.transact(orgId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);	 
 	}
 			

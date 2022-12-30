@@ -58,7 +58,7 @@ public class CreditCardBsl {
 		if(((CreditCard)creditCard).getBalance() == 0 ||((CreditCard)creditCard).getBalance()<((CreditCard)creditCard).getAmountAfterDiscount()) {
 			return "Not enough credit";
 		}
-		((CreditCard)creditCard).setTransactionID(transactionID);
+		((CreditCard)creditCard).setTransactionId(transactionID);
 		creditCards.add(((CreditCard)creditCard));
 		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmountAfterDiscount();
 		((CreditCard)creditCard).setBalance(creditBalance);
@@ -89,7 +89,7 @@ public class CreditCardBsl {
 	
 	public static CreditCard getCreditCardByTransaction(int transactionId) {
 		for(CreditCard creditCardDB : creditCards) {
-			if(creditCardDB.getTransactionID() == transactionId) {
+			if(creditCardDB.getTransactionId() == transactionId) {
 				return creditCardDB;
 			}
 		}

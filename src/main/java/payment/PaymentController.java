@@ -6,9 +6,7 @@ import java.util.Vector;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,7 +14,6 @@ public class PaymentController {
 	static CreditCardBsl creditCardBsl;
 	static WalletBsl walletBsl;
 	static CashBsl cashBsl;
-//	static int transactionID=0;
 	
 	public PaymentController(CreditCardBsl creditCardBsl, WalletBsl walletBsl, CashBsl cashBsl) {
 		this.creditCardBsl = creditCardBsl;

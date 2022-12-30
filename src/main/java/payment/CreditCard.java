@@ -29,10 +29,10 @@ public class CreditCard implements Payment{
 		this.amount = amount;
 		this.serviceName = serviceName;
 	}
-	public void setTransactionID(int transactionId) {
+	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
-	public int getTransactionID() {
+	public int getTransactionId() {
 		return transactionId;
 	}
 	public int getAmount() {

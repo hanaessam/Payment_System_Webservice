@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import payment.Wallet;
-
 @RestController
-public class RefundController implements Subject {
+public class RefundController{
 	RefundBsl refundBsl;
 	
 	public RefundController(RefundBsl refundBsl) {
@@ -50,23 +48,4 @@ public class RefundController implements Subject {
 		}
 		return "refund is " + request.getStatus() + "\n" + refundBsl.setWalletBalance(request, status);
 	}
-	
-//	public void subscribe(Observer userObserver) {
-//		RefundController.userObserver = (User) userObserver;
-//		System.out.println(User.username);
-//			requests.put(((User) userObserver).userRequestList,((User) userObserver).refundedAmount);
-//			System.out.println(requests);
-//	}
-//	public void unSubscribe(Observer observer) {
-//		RefundController.userObserver = (User) userObserver;
-//		System.out.println(User.username);
-//			requests.remove(((User) userObserver).userRequestList,((User) userObserver).refundedAmount);
-//			System.out.println(requests);
-//	};
-//	
-//	public void notifyObservers(String message) {
-//        for (User user : userForm.users) {
-//            user.update();
-//        }
-//	}
 }
