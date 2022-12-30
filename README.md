@@ -17,7 +17,7 @@
 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web 
 place the maven jar file in your workspace
 
-**To run on tomcat server: **
+**To run on tomcat server:**
 
  1. Download tomcat v10.0
  2. Beside the console there's a tab called Servers click on it
