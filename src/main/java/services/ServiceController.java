@@ -169,6 +169,28 @@ public class ServiceController {
 	public static LandLine getLandline() {
 		return  ServiceBsl.getLandLine();
 	}
+	
+	@PostMapping(value="/service/Landline/payCreditCard/{receiptId}")
+	public String addLandline(@RequestBody CreditCard creditCard , @PathVariable("receiptId") int receiptId) {
+		creditCard.setAmountAfterDiscount(creditCard.getAmount());
+		transactionID++;
+		creditCard.setServiceName(ServiceBsl.getLandLine().getName());
+		if(ServiceBsl.getLandLine().getSpecificDiscount() != 0) {
+			discount = new SpecificDiscountBsl(discount);
+			((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getSpecificDiscount();
+			creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmount()));
+		}
+		if(ServiceBsl.getLandLine().getOverallDiscount() != 0) {
+			discount = new OverallDiscountBsl(discount);
+			((DiscountDecorator)discount).percent = ServiceBsl.getLandLine().getOverallDiscount();
+			creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
+		}
+		if(!services.ReciptProviderBsl.check(receiptId))
+			return "Provider not found";
+		if(payment.CreditCardBsl.calculatePayment(creditCard, transactionID)=="User not found.")
+			return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
+		return services.ReciptProviderBsl.transact(receiptId, creditCard.getAmountAfterDiscount()) + payment.CreditCardBsl.calculatePayment(creditCard, transactionID);	
+	}
 
 		@PostMapping(value="/service/Landline/payCash/{receiptId}")
 		public String addLandline(@RequestBody Cash cash , @PathVariable("receiptId") int receiptId) {
