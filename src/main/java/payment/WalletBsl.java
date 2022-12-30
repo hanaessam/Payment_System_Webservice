@@ -23,7 +23,7 @@ public class WalletBsl{
 		wallets.add(((Wallet)wallet));
 		walletBalance-=((Wallet)wallet).getAmountAfterDiscount();
 		security.Authentication.getUser(((Wallet)wallet).getUserId()).setWalletBalance(walletBalance);
-		return "Success!\nNew wallet balance: "+ walletBalance;
+		return "Success!\nTransaction ID: "+ transactionID+"\nNew wallet balance: "+ walletBalance;
 	}
 	
 	public Wallet getWallet(int id) {

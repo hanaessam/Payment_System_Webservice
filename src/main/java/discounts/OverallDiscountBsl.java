@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import payment.CreditCard;
-
 @Service
 public class OverallDiscountBsl extends DiscountDecorator{
 	ArrayList<OverallDiscount> overallDiscounts;

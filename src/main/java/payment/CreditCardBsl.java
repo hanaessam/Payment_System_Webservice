@@ -1,14 +1,19 @@
 package payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreditCardBsl {
+	private static Vector<HashMap<String, Integer>> addToWalletTransactions;
 	private static ArrayList<CreditCard> creditCards;
-//	private ArrayList<Wallet> addToWalletTransactions;
+	
 	public CreditCardBsl() {
 		creditCards = new ArrayList<>();
+		addToWalletTransactions = new Vector<>();
 	}
 	
 	public ArrayList<CreditCard> getCreditCards() {
@@ -17,6 +22,14 @@ public class CreditCardBsl {
 
 	public static void setCreditCards(ArrayList<CreditCard> creditCards) {
 		CreditCardBsl.creditCards = creditCards;
+	}
+
+	public Vector<HashMap<String, Integer>> getAddToWalletTransactions() {
+		return addToWalletTransactions;
+	}
+
+	public void setAddToWalletTransactions(Vector<HashMap<String, Integer>> addToWalletTransactions) {
+		this.addToWalletTransactions = addToWalletTransactions;
 	}
 
 	public String addToWallet(int id, int funds) {
@@ -29,7 +42,10 @@ public class CreditCardBsl {
 				}
 				int walletBalance = security.Authentication.getUser(getCreditCard(id).getUserId()).getWalletBalance();
 				security.Authentication.getUser(getCreditCard(id).getUserId()).setWalletBalance(walletBalance+funds);
-//				add to wallet transactions 
+				String userName =  security.Authentication.getUser(getCreditCard(id).getUserId()).getUsername();
+				HashMap<String, Integer> transaction = new HashMap<>();
+				transaction.put(userName, funds);
+				addToWalletTransactions.add(transaction);
 				break;
 			}
 		}
@@ -46,7 +62,7 @@ public class CreditCardBsl {
 		creditCards.add(((CreditCard)creditCard));
 		int creditBalance = ((CreditCard)creditCard).getBalance()-((CreditCard)creditCard).getAmountAfterDiscount();
 		((CreditCard)creditCard).setBalance(creditBalance);
-		return "Success!\nNew credit balance: "+ creditBalance;
+		return "Success!\nTransaction ID: "+ transactionID+"\nNew credit balance: "+ creditBalance;
 	}
 	
 //	public String addCreditCard(CreditCard creditCard) {

@@ -11,6 +11,7 @@ import security.Authentication;
 @RestController
 public class UserController {
 	Authentication userBsl;
+	static int userId = 0;
 	
 	public UserController(Authentication userBsl) {
 		this.userBsl = userBsl;
@@ -18,7 +19,9 @@ public class UserController {
 	
 	@PostMapping(value="/users")
 	public String registerUser(@RequestBody User user) {
-		return userBsl.addUser(user);
+		userId++;
+		user.setId(userId);
+		return userBsl.addUser(user) + "\nUser ID : "+userId;
 	}
 	
 	@GetMapping(value="/users/{id}")

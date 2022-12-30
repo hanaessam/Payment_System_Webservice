@@ -7,29 +7,35 @@ public class Etisalat implements ServiceProvider{
 
 	private int Id;
 	private String name;
+	private int totalTransactionAmount;
+
 	public Etisalat() {
 		Id = 11;
 		name = "Etisalat";
+		totalTransactionAmount = 0;
 	}
-	@Override
+	
 	public String getName() {
 		return name;
 	}
 
-	@Override
 	public int getId() {
 		return Id;
 	}
 
-	@Override
 	public void setName(String name) {
 		this.name = name;
-		
 	}
 
-	@Override
 	public void setId(int Id) {
 		this.Id = Id;
 	}
-	
+
+	public int getTotalTransactionAmount() {
+		return totalTransactionAmount;
+	}
+
+	public void setTotalTransactionAmount(int totalTransaction) {
+		totalTransactionAmount = totalTransaction;
+	}
 }

@@ -2,6 +2,8 @@ package payment;
 
 import org.springframework.stereotype.Component;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
+
 @Component
 public class Wallet implements Payment{
 	private int transactionId;

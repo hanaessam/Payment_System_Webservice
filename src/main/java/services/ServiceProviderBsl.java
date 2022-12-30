@@ -1,7 +1,5 @@
 package services;
 
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Service;
 
 
@@ -38,6 +36,35 @@ public class ServiceProviderBsl {
 	}
 	public static Orange getOrange() {
 		return orange;
+	}
+	
+	public static String transact(int providerId, int amount) {
+		if(providerId == 15) {
+			we.setTotalTransactionAmount(we.getTotalTransactionAmount() + amount);
+			return "WE SERVICE PROVIDER\n" ;
+		}
+		else if(providerId == 11){
+			etisalat.setTotalTransactionAmount(etisalat.getTotalTransactionAmount() + amount);
+			return "ETISALAT SERVICE PROVIDER\n" ;
+		}
+		else if(providerId == 10){
+			vodafone.setTotalTransactionAmount(vodafone.getTotalTransactionAmount() + amount);
+			return "VODAFONE SERVICE PROVIDER\n" ;
+		}
+		else if(providerId == 12){
+			orange.setTotalTransactionAmount(orange.getTotalTransactionAmount() + amount);
+			return "ORANGE SERVICE PROVIDER\n" ;
+		}
+		else {
+			return "Provider not found";
+		}
+	}
+
+	public static boolean check(int providerId) {
+		if(providerId==11 || providerId==10 ||providerId==15 ||providerId==12) {
+			return true;
+		}
+		return false;
 	}
 	
 //	public  String addServiceProvider(String name) {

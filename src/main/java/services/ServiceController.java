@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import discounts.Discount;
 import discounts.DiscountDecorator;
-import discounts.OverallDiscount;
 import discounts.OverallDiscountBsl;
-import discounts.ServicePrice;
-import discounts.SpecificDiscount;
 import discounts.SpecificDiscountBsl;
 import payment.Cash;
 import payment.CreditCard;
@@ -20,7 +17,7 @@ import payment.Wallet;
 @RestController
 public class ServiceController {
 	ServiceBsl serviceBsl;
-	 static ServiceProviderBsl serviceProviderBsl ;
+	static ServiceProviderBsl serviceProviderBsl ;
 	Discount discount;
 	static int transactionID = 0;
 	
@@ -41,8 +38,8 @@ public class ServiceController {
 		return  ServiceBsl.getMobileRecharge();
 	}
 	
-	@PostMapping(value="/service/mobileRecharge/payCredit")
-	public String addRecharge(@RequestBody CreditCard creditCard) {
+	@PostMapping(value="/service/mobileRecharge/payCredit/{providerId}")
+	public String addRecharge(@RequestBody CreditCard creditCard, @PathVariable("providerId") int providerId) {
 		creditCard.setAmountAfterDiscount(creditCard.getAmount());
 		transactionID++;
 		creditCard.setServiceName(ServiceBsl.getMobileRecharge().getName());
@@ -56,22 +53,29 @@ public class ServiceController {
 			((DiscountDecorator)discount).percent = ServiceBsl.getMobileRecharge().getOverallDiscount();
 			creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
 		}
-		
-		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
+		if(!services.ServiceProviderBsl.check(providerId))
+			return "Provider not found";
+		return services.ServiceProviderBsl.transact(providerId, creditCard.getAmountAfterDiscount()) + payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
 	
-	@PostMapping(value="/service/mobileRecharge/payCash")
-	public String addRecharge(@RequestBody Cash cash) {
+	@PostMapping(value="/service/mobileRecharge/payCash/{providerId}")
+	public String addRecharge(@RequestBody Cash cash, @PathVariable("providerId") int providerId) {
+		cash.setAmountAfterDiscount(cash.getAmount());
 		transactionID++;
 		cash.setServiceName(ServiceBsl.getMobileRecharge().getName());
-		return payment.CashBsl.calculatePayment(cash, transactionID);
+		if(!services.ServiceProviderBsl.check(providerId))
+			return "Provider not found";
+		return services.ServiceProviderBsl.transact(providerId, cash.getAmountAfterDiscount()) + payment.CashBsl.calculatePayment(cash, transactionID);	
 	}
 	
-	@PostMapping(value="/service/mobileRecharge/payWallet")
-	public String addRecharge(@RequestBody Wallet wallet) {
+	@PostMapping(value="/service/mobileRecharge/payWallet/{providerId}")
+	public String addRecharge(@RequestBody Wallet wallet, @PathVariable("providerId") int providerId) {
+		wallet.setAmountAfterDiscount(wallet.getAmount());
 		transactionID++;
 		wallet.setServiceName(ServiceBsl.getMobileRecharge().getName());
-		return payment.WalletBsl.calculatePayment(wallet, transactionID);
+		if(!services.ServiceProviderBsl.check(providerId))
+			return "Provider not found";
+		return services.ServiceProviderBsl.transact(providerId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);
 	} 
 
 //------------------------Internet Payment------------------------
@@ -94,13 +98,14 @@ public class ServiceController {
 		if(ServiceBsl.getInternetPayment().getOverallDiscount() != 0) {
 			discount = new OverallDiscountBsl(discount);
 			((DiscountDecorator)discount).percent = ServiceBsl.getInternetPayment().getOverallDiscount();
-			creditCard.setAmountAfterDiscount( (int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
+			creditCard.setAmountAfterDiscount((int)discount.calculateDiscount(creditCard.getAmountAfterDiscount()));
 		}
 		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
 	
 	@PostMapping(value="/service/InternetPayment/payCash")
 	public String addInternet(@RequestBody Cash cash) {
+		cash.setAmountAfterDiscount(cash.getAmount());
 		transactionID++;
 		cash.setServiceName(ServiceBsl.getInternetPayment().getName());
 		return payment.CashBsl.calculatePayment(cash, transactionID);
@@ -108,6 +113,7 @@ public class ServiceController {
 	
 	@PostMapping(value="/service/InternetPayment/payWallet")
 	public String addInternet(@RequestBody Wallet wallet) {
+		wallet.setAmountAfterDiscount(wallet.getAmount());
 		transactionID++;
 		wallet.setServiceName(ServiceBsl.getInternetPayment().getName());
 		return payment.WalletBsl.calculatePayment(wallet, transactionID);
@@ -140,6 +146,7 @@ public class ServiceController {
 		
 		@PostMapping(value="/service/Landline/payCash")
 		public String addLandline(@RequestBody Cash cash) {
+			cash.setAmountAfterDiscount(cash.getAmount());
 			transactionID++;
 			cash.setServiceName(ServiceBsl.getLandLine().getName());
 			return payment.CashBsl.calculatePayment(cash, transactionID);
@@ -147,39 +154,40 @@ public class ServiceController {
 		
 		@PostMapping(value="/service/Landline/payWallet")
 		public String addLandline(@RequestBody Wallet wallet) {
+			wallet.setAmountAfterDiscount(wallet.getAmount());
 			transactionID++;
 			wallet.setServiceName(ServiceBsl.getLandLine().getName());
 			return payment.WalletBsl.calculatePayment(wallet, transactionID);
 		}
 		
-		//------------------------Donations------------------------
+//------------------------Donations------------------------
 
-		@GetMapping(value="/service/Donations")
-		public static Donations getDonations() {
-			return  ServiceBsl.getDonations();
-		}
+	@GetMapping(value="/service/Donations")
+	public static Donations getDonations() {
+		return  ServiceBsl.getDonations();
+	}		
 		
-		
-		
-			@PostMapping(value="/service/Donations/payCredit")
-			public String addDonation(@RequestBody CreditCard creditCard) {
-				creditCard.setAmountAfterDiscount(creditCard.getAmount());
-				transactionID++;
-				creditCard.setServiceName(ServiceBsl.donations.getName());
-				return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
-			}
-			
-			@PostMapping(value="/service/Donations/payCash")
-			public String addDonation(@RequestBody Cash cash) {
-				transactionID++;
-				cash.setServiceName(ServiceBsl.getDonations().getName());
-				return payment.CashBsl.calculatePayment(cash, transactionID);
-			}
-			
-			@PostMapping(value="/service/Donationst/payWallet")
-			public String addDonation(@RequestBody Wallet wallet) {
-				transactionID++;
-				wallet.setServiceName(ServiceBsl.getDonations().getName());
-				return payment.WalletBsl.calculatePayment(wallet, transactionID);
-			}
+	@PostMapping(value="/service/Donations/payCredit")
+	public String addDonation(@RequestBody CreditCard creditCard) {
+		creditCard.setAmountAfterDiscount(creditCard.getAmount());
+		transactionID++;
+		creditCard.setServiceName(ServiceBsl.donations.getName());
+		return payment.CreditCardBsl.calculatePayment(creditCard, transactionID);
 	}
+			
+	@PostMapping(value="/service/Donations/payCash")
+	public String addDonation(@RequestBody Cash cash) {
+		cash.setAmountAfterDiscount(cash.getAmount());
+		transactionID++;
+		cash.setServiceName(ServiceBsl.getDonations().getName());
+		return payment.CashBsl.calculatePayment(cash, transactionID);
+	}
+			
+	@PostMapping(value="/service/Donationst/payWallet")
+	public String addDonation(@RequestBody Wallet wallet) {
+		wallet.setAmountAfterDiscount(wallet.getAmount());
+		transactionID++;
+		wallet.setServiceName(ServiceBsl.getDonations().getName());
+		return payment.WalletBsl.calculatePayment(wallet, transactionID);
+	}
+}

@@ -10,7 +10,6 @@ public class User{
 	private String password;
 	public int walletBalance;
 	public int mobileNumber;
-	public int homeNumber;
 
 	public User() {
 		this.id=0;
@@ -19,7 +18,6 @@ public class User{
 		this.email = "";
 		this.walletBalance = 0;
 		this.mobileNumber = 0;
-		this.homeNumber = 0;
 	}
 
 	public User(int id,String username, String password, String email, int walletbalance, int mobilenumber, int homenumber) {
@@ -29,7 +27,6 @@ public class User{
 		this.email = email;
 		this.walletBalance = walletbalance;
 		this.mobileNumber = mobilenumber;
-		this.homeNumber = homenumber;
 	}
 	
 	public int getId() {
@@ -77,14 +74,4 @@ public class User{
 	public void setMobileNumber(int mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-
-	public int getHomeNumber() {
-		return homeNumber;
-	}
-
-	public void setHomeNumber(int homeNumber) {
-		this.homeNumber = homeNumber;
-	}
-	
-	
 }

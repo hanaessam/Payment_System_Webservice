@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class CashBsl {
 	static ArrayList<Cash> cashs;
 	public CashBsl() {
-		// TODO Auto-generated constructor stub
 		cashs = new ArrayList<>();
 	}
 	
@@ -17,7 +16,7 @@ public class CashBsl {
 			return "User not found.";
 		((Cash)cash).setTransactionId(transactionID);
 		cashs.add(((Cash)cash));
-		return "Please pay "+ ((Cash)cash).getAmountAfterDiscount() + " cash.";
+		return "Please pay "+ ((Cash)cash).getAmountAfterDiscount() + " cash.\nTransaction ID: "+ transactionID;
 	}
 	
 	public Cash getCash(int id) {
@@ -40,8 +39,4 @@ public class CashBsl {
 	public ArrayList<Cash> getCashs() {
 		return cashs;
 	}
-
-//	public static void setCashs(ArrayList<Cash> cashs) {
-//		this.cashs = cashs;
-//	}
 }

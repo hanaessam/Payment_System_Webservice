@@ -4,32 +4,37 @@ import org.springframework.stereotype.Service;
 
 @Component
 public class We implements ServiceProvider{
-    private Integer id;
-    private String nameString;
+    private int Id;
+    private String name;
+    private int totalTransactionAmount;
 	
 	public We() {
-		id = 15;
-		nameString = "We";
+		Id = 15;
+		name = "We";
+		totalTransactionAmount = 0;
 	}
 	
-	@Override
 	public String getName() {
-		return nameString;
+		return name;
 	}
-	
-	@Override
+
 	public int getId() {
-		return id;
+		return Id;
 	}
 
-	@Override
 	public void setName(String name) {
-		nameString = name;
-		
+		this.name = name;
 	}
 
-	@Override
 	public void setId(int Id) {
-		id = Id;
+		this.Id = Id;
+	}
+
+	public int getTotalTransactionAmount() {
+		return totalTransactionAmount;
+	}
+
+	public void setTotalTransactionAmount(int totalTransaction) {
+		totalTransactionAmount = totalTransaction;
 	}
 }

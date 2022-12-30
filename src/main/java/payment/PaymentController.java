@@ -1,6 +1,8 @@
 package payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +35,11 @@ public class PaymentController {
 	@GetMapping(value="/payment/walet/listTransactions")
 	public static ArrayList<Wallet> listWalletTransactions() {
 		return walletBsl.getWallets();
+	}
+	
+	@GetMapping(value="/walet/listAddToWalletTransactions")
+	public static Vector<HashMap<String, Integer>> listAddToWalletWalletTransactions() {
+		return creditCardBsl.getAddToWalletTransactions();
 	}
 	
 	@GetMapping(value="/payment/creditcard/{cardId}")

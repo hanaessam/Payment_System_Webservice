@@ -24,7 +24,7 @@ public class RefundController implements Subject {
 	}
 	
 	@GetMapping(value="/refunds/{id}")
-	public RefundRequest loginRefund(@PathVariable("id") int id) {
+	public RefundRequest getRefund(@PathVariable("id") int id) {
 		return refundBsl.getRefund(id);
 	}
 	
