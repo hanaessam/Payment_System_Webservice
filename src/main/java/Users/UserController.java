@@ -17,7 +17,7 @@ public class UserController {
 		this.userBsl = userBsl;
 	}
 	
-	@PostMapping(value="/users")
+	@PostMapping(value="/users/signup")
 	public String registerUser(@RequestBody User user) {
 		userId++;
 		user.setId(userId);
@@ -25,9 +25,15 @@ public class UserController {
 	}
 	
 	@GetMapping(value="/users/{id}")
-	public User loginUser(@PathVariable("id") int id) {
+	public User getUser(@PathVariable("id") int id) {
 		return userBsl.getUser(id);
 	}
+	
+	@GetMapping(value="/users/login/{username}/{password}")
+	public String loginUser(@PathVariable("username") String username, @PathVariable("password") String password) {
+		return userBsl.login(username, password);
+	}
+	
 	@GetMapping(value="/users/check/{id}")
 	public String checkUser(@PathVariable("id") int id) {
 		return userBsl.checkUser(id);

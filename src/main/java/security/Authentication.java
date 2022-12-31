@@ -38,6 +38,17 @@ public class Authentication {
 		return null;
 	}
 	
+	public static String login(String username, String password) {
+		for(User userDB : users) {
+			if(userDB.getUsername().equals(username)) {
+				if(userDB.getPassword().equals(password)) {
+					return "Success";
+				}
+			}
+		}
+		return "Incorrect username or password\nPlease try again";
+	}
+	
 	public String checkUser(int id){
 		for(User userDB : users) {
 			if(userDB.getId() == id) {
