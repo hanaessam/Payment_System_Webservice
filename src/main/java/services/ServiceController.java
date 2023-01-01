@@ -25,13 +25,7 @@ public class ServiceController {
 		this.serviceBsl = serviceBsl;
 	}
 	
-//	@GetMapping(value="/service/mobileRecharge/{provider}")
-//	public static MobileRecharge getMobileRecharge(@PathVariable("provider") String provider) {
-//	//	serviceProviderBsl.addServiceProvider(provider);
-//		  //ServiceBsl.getMobileRecharge().setServiceProviders(provider);
-//		//serviceProviderBsl.addServiceProvider(provider);
-//		return  ServiceBsl.getMobileRecharge();
-//	}
+
 	@GetMapping(value="/service/mobileRecharge")
 	public static MobileRecharge getMobileRecharge() {
 	
@@ -155,13 +149,7 @@ public class ServiceController {
 		return payment.CashBsl.calculatePayment(cash, transactionID);
 	}
 	
-//	@PostMapping(value="/service/InternetPayment/payWallet")
-//	public String addInternet(@RequestBody Wallet wallet) {
-//		wallet.setAmountAfterDiscount(wallet.getAmount());
-//		transactionID++;
-//		wallet.setServiceName(ServiceBsl.getInternetPayment().getName());
-//		return payment.WalletBsl.calculatePayment(wallet, transactionID);
-//	}
+
 	
 //------------------------Landline------------------------
 
@@ -268,11 +256,5 @@ public class ServiceController {
 		return services.DonationsBsl.transact(orgId, wallet.getAmountAfterDiscount()) + payment.WalletBsl.calculatePayment(wallet, transactionID);	 
 	}
 			
-//	@PostMapping(value="/service/Donationst/payWallet")
-//	public String addDonation(@RequestBody Wallet wallet) {
-//		wallet.setAmountAfterDiscount(wallet.getAmount());
-//		transactionID++;
-//		wallet.setServiceName(ServiceBsl.getDonations().getName());
-//		return payment.WalletBsl.calculatePayment(wallet, transactionID);
-//	}
+
 }

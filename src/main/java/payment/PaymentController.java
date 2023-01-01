@@ -54,20 +54,5 @@ public class PaymentController {
 		return creditCardBsl.addToWallet(id, funds);
 	}
 	
-//	@PostMapping(value="/payment/creditcard")
-//	public String payCredit(@RequestBody CreditCard creditCard) {
-//		transactionID++;
-//		return creditCardBsl.calculatePayment(creditCard, transactionID);
-//	}
-//	
-//	@PostMapping(value="/payment/cash")
-//	public String payCash(@RequestBody Cash cash) {
-//		transactionID++;
-//		return cashBsl.calculatePayment(cash, transactionID);
-//	}
-//	@PostMapping(value="/payment/wallet")
-//	public String payWallet(@RequestBody Wallet wallet) {
-//		transactionID++;
-//		return walletBsl.calculatePayment(wallet, transactionID);
-//	}
+
 }
