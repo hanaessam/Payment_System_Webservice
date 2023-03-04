@@ -65,18 +65,7 @@ public class CreditCardBsl {
 		return "Success!\nTransaction ID: "+ transactionID+"\nNew credit balance: "+ creditBalance;
 	}
 	
-//	public String addCreditCard(CreditCard creditCard) {
-//		if(security.Authentication.getUser(creditCard.getUserId()) == null) {
-//			return "User is not found";
-//		}
-//		for(CreditCard creditCardDB : creditCards) {
-//			if(creditCardDB.getCardID() == creditCard.getCardID()) {
-//				return "CreditCard already exists.";
-//			}
-//		}
-//		creditCards.add(creditCard);
-//		return"CreditCard info added successfully";
-//	}
+
 	
 	public CreditCard getCreditCard(int cardId) {
 		for(CreditCard creditCardDB : getCreditCards()) {
